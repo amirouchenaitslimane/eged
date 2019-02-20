@@ -1,0 +1,15 @@
+
+// Import Custom Variables
+@import "variables.scss";
+@import '~font-awesome/css/font-awesome.min.css';
+// Import Bootstrap
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~datatables.net-bs4/css/dataTables.bootstrap4.min.css";
+// Import Custom SCSS
+@import "mixins.scss";
+@import "global.scss";
+@import "utilities.scss";
+@import "navbar.scss";
+@import "cards.scss";
+@import "login.scss";
+@import "footer.scss";
