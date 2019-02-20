@@ -1,6 +1,16 @@
 {
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "5.7.0",
+        "bootstrap": "4.2.1",
+        "chart.js": "2.7.3",
+        "datatables.net-bs4": "1.10.19",
+        "jquery": "3.3.1",
+        "jquery.easing": "^1.4.1"
+    },
     "devDependencies": {
         "@symfony/webpack-encore": "^0.22.0",
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.0.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
