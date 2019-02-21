@@ -42,7 +42,7 @@ let option_tables={
 
 $('#frais').DataTable(option_tables);
 $(document).ready(()=>{
-    console.log('hola depuis le encore');
+    //console.log('hola depuis le encore');
     $("#sidebarToggle").on('click', function(e) {
         e.preventDefault();
         $("body").toggleClass("sidebar-toggled");

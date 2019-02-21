@@ -16,6 +16,6 @@ class SecurityController extends AbstractController
 {
   public function login() :Response
   {
-    return $this->render('security/login.html');
+    return $this->render('security/login.html.twig');
   }
 }
