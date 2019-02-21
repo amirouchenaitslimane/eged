@@ -9,8 +9,10 @@
     <meta name="author" content="">
 
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-    {% block stylesheets %}{% endblock %}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('css/app') }}
+    {% endblock %}
 
 </head>
 
@@ -88,7 +90,7 @@
             </a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle " href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Pages</span>
             </a>
@@ -163,9 +165,9 @@
     </div>
 </div>
 
-<script src="{{ asset('build/app.js') }}"></script>
-<script src="{{ asset('build/runtime.js') }}"></script>
-{% block javascripts %}{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/app') }}
+{% endblock %}
 </body>
 
 </html>

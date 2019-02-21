@@ -5,8 +5,25 @@
  * (and its CSS file) in your base layout (base.html.twig).
  */
 
-import('../sass/app.scss');
-import('@fortawesome/fontawesome-free/css/all.min.css');
-import('@fortawesome/fontawesome-free/js/all.js');
-import('./sbadmin.js');
-console.log('hello word');
+
+const $ = require('jquery');
+//import "popper.js/dist/popper";
+import "bootstrap/dist/js/bootstrap.bundle.min"
+import  "@fortawesome/fontawesome-free/js/all.js";
+require('datatables.net-bs4/js/dataTables.bootstrap4.min');
+
+
+//console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+
+$(document).ready(()=>{
+    console.log('hola depuis le encore');
+    $("#sidebarToggle").on('click', function(e) {
+        e.preventDefault();
+        $("body").toggleClass("sidebar-toggled");
+        $(".sidebar").toggleClass("toggled");
+    });
+
+    $('#dataTable').DataTable();
+
+});
