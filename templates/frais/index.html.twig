@@ -1,0 +1,127 @@
+{% extends 'layout.html.twig' %}
+{% block body %}
+    <div class="container-fluid">
+
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Saisie des frais </li>
+        </ol>
+
+        <!-- dédut de la vue dataTable -->
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Recherche</div>
+            <div class="card-body">
+
+            </div>
+
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Les frais</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="frais" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Libelle</th>
+                            <th>Type</th>
+                            <th>Montant TTC</th>
+                            <th>Montant TVA</th>
+                            <th>Montant HT</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Totaux</th>
+                            <th></th>
+                            <th></th>
+                            <th>1000€</th>
+                            <th>1000€</th>
+                            <th>1000€ </th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+
+                        <tbody>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- fin du data table -->
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}
