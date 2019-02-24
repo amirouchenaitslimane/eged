@@ -1,0 +1,756 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Frais{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Menu action -->
+
+        <div class="row">
+            <div class="col-md-12">
+            <div class="btn-group float-right" >
+                <button type="button" class="btn btn-secondary">Action</button>
+                <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item " href="#"  href="#" data-toggle="modal" data-target="#addFraisModal"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#genereNoteModal" genereNoteModal><i class="fas fa-file-excel"></i> &nbsp;Editer une note de frais</a>
+                </div>
+            </div>
+        </div>
+        </div>
+        <hr>
+        <!-- Fin du menu actions -->
+
+
+
+        <!-- dédut de la vue dataTable -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Filtrer par date</div>
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label for="message-text" class="col-form-label">Année</label>
+                            <select id="inputState" class="form-control">
+                                <option>2016</option>
+                                <option>2017</option>
+                                <option>2017</option>
+                                <option>2018</option>
+                                <option>2019</option>
+                                <option>2020</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+
+                        </div>
+                        <div class="col-sm-3">
+
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="message-text" class="col-form-label">Mois</label>
+                            <select id="inputState" class="form-control">
+                                <option>Janvier</option>
+                                <option>Février</option>
+                                <option>Mars</option>
+                                <option>Avril</option>
+                                <option>Mai</option>
+                                <option>Juin</option>
+                                <option>Juillet</option>
+                                <option>Aout</option>
+                                <option>Septembre</option>
+                                <option>Octobre</option>
+                                <option>Novembre</option>
+                                <option>Décembre</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                    Filtrer
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Les frais</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Libelle</th>
+                            <th>Type</th>
+                            <th>Montant TTC</th>
+                            <th>Taxe</th>
+                            <th>Montant HT</th>
+                            <th>Etat</th>
+                            <th>Justificatif</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Totaux</th>
+                            <th></th>
+                            <th></th>
+                            <th>1000€</th>
+                            <th>1000€</th>
+                            <th>1000€ </th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+
+                        <tbody>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>01/02/2018</td>
+                            <td>Déjeuner</td>
+                            <td>Repas personnel</td>
+                            <td>10,47</td>
+                            <td>0,95</td>
+                            <td>9,52</td>
+                            <td>Incomplet </td>
+                            <td><i class="far fa-file-pdf"></i></td>
+                            <td>
+                                <i class="fas fa-edit"></i>&nbsp;
+                                <i class="far fa-trash-alt"></i>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- fin du data table -->
+
+
+
+        <!-- formulaire ajout de frais -->
+        <div class="modal fade" id="addFraisModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ajout frais</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="recipient-name" class="col-form-label">Date *</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="message-text" class="col-form-label">Libelle frais *</label>
+                                    <input type="text" class="form-control" >
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="message-text" class="col-form-label">Type *</label>
+                                    <select id="inputState" class="form-control">
+                                        <option>Choix type frais</option>
+                                        <option>Repas personnel</option>
+                                        <option>Repas professionnel</option>
+                                        <option>Transport</option>
+                                        <option>Achat professionnel</option>
+                                        <option>Cadeau client</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="message-text" class="col-form-label">Montant TTC *</label>
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="message-text" class="col-form-label">Taxe *</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="message-text" class="col-form-label">Montant HT *</label>
+                                    <input type="text" class="form-control">
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="message-text" class="col-form-label">Justificatif *</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary">Enregistrer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin formulaire ajout de frais -->
+
+
+
+        <!-- formulaire export excel -->
+        <div class="modal fade" id="genereNoteModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Export frais</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="message-text" class="col-form-label">Année</label>
+                                        <select id="inputState" class="form-control">
+                                            <option>2016</option>
+                                            <option>2017</option>
+                                            <option>2017</option>
+                                            <option>2018</option>
+                                            <option>2019</option>
+                                            <option>2020</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                    </div>
+                                    <div class="col-sm-3">
+
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="message-text" class="col-form-label">Mois</label>
+                                        <select id="inputState" class="form-control">
+                                            <option>Janvier</option>
+                                            <option>Février</option>
+                                            <option>Mars</option>
+                                            <option>Avril</option>
+                                            <option>Mai</option>
+                                            <option>Juin</option>
+                                            <option>Juillet</option>
+                                            <option>Aout</option>
+                                            <option>Septembre</option>
+                                            <option>Octobre</option>
+                                            <option>Novembre</option>
+                                            <option>Décembre</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-primary">Générer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- fin du formulaire export -->
+
+    </div>
+    <!-- /.container-fluid -->
+
+
+{% endblock %}

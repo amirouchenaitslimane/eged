@@ -15,6 +15,9 @@ import 'chart.js/dist/Chart.bundle.min';
 
 //ajouter toutes les configs de data tables dans cette objet option_tables
 let option_tables={
+    "bFilter": false,
+    "bInfo": false,
+    "bLengthChange": false,
     "language":{
         processing:     "Traitement en cours...",
         search:         "Rechercher&nbsp;:",
