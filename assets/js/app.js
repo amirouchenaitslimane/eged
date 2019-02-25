@@ -12,6 +12,8 @@ import "bootstrap/dist/js/bootstrap.bundle.min"
 import  "@fortawesome/fontawesome-free/js/all.js";
 require('datatables.net-bs4/js/dataTables.bootstrap4.min');
 import 'chart.js/dist/Chart.bundle.min';
+require('./bootstrap-datepicker.min');
+require('./bootstrap-datepicker.fr.min');
 
 //ajouter toutes les configs de data tables dans cette objet option_tables
 let option_tables={
@@ -42,7 +44,10 @@ let option_tables={
     }
 };
 //console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
-
+let option_calendar = {
+    language:'fr',
+    format: 'dd/mm/yyyy',
+}
 $('#frais').DataTable(option_tables);
 $(document).ready(()=>{
     //console.log('hola depuis le encore');
@@ -55,9 +60,22 @@ $(document).ready(()=>{
     $('#dataTable').DataTable(option_tables);
 
 
-//$('#datepicker').datepicker();
+    $('#datetimepicker1').datepicker({
+    language:'fr',
+    format: 'dd/mm/yyyy',
+
+    });
+    $('#datetimepicker2').datepicker({
+        language:'fr',
+        format: 'mm-yyyy',
+
+    });
+$('#filter').datepicker({
+    language:'fr',
+    format: 'mm-yyyy',
 
 
+});
 });
 
 
