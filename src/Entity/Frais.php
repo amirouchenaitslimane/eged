@@ -42,7 +42,7 @@ class Frais
   /**
    * @ORM\Column(type="decimal")
    */
-    private $tax;
+    private $taxe;
   /**
    * @ORM\Column(type="string")
    */
@@ -124,17 +124,7 @@ class Frais
         return $this;
     }
 
-    public function getTax()
-    {
-        return $this->tax;
-    }
 
-    public function setTax($tax): self
-    {
-        $this->tax = $tax;
-
-        return $this;
-    }
 
     public function getEtat(): ?string
     {
@@ -144,6 +134,18 @@ class Frais
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getTaxe()
+    {
+        return $this->taxe;
+    }
+
+    public function setTaxe($taxe): self
+    {
+        $this->taxe = $taxe;
 
         return $this;
     }

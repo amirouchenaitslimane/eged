@@ -9,13 +9,23 @@
 namespace App\Controller;
 
 
+use App\Entity\Frais;
+use App\Form\FraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class FraisController extends AbstractController
 {
-  public function index() :Response
+  public function index(Request $request) :Response
   {
-    return $this->render('frais/frais.html.twig');
+    $em = $this->getDoctrine()->getManager();
+    $frais = new Frais();
+    $form = $this->createForm(FraisType::class,$frais);
+    $form->handleRequest($request);
+    return $this->render('frais/frais.html.twig',
+      [
+        'form'=>$form->createView(),
+      ]);
   }
 }
