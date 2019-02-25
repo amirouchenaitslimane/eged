@@ -45,58 +45,13 @@
                         </button>
                     </div>
 
-
-
-
-                    {#<div class="row">#}
-                        {#<div class="col-sm-3">#}
-                            {#<label for="message-text" class="col-form-label">Année</label>#}
-                            {#<select id="inputState" class="form-control">#}
-                                {#<option>2016</option>#}
-                                {#<option>2017</option>#}
-                                {#<option>2017</option>#}
-                                {#<option>2018</option>#}
-                                {#<option>2019</option>#}
-                                {#<option>2020</option>#}
-                            {#</select>#}
-                        {#</div>#}
-                        {#<div class="col-sm-3">#}
-
-                        {#</div>#}
-                        {#<div class="col-sm-3">#}
-
-                        {#</div>#}
-                        {#<div class="col-sm-3">#}
-                            {#<label for="message-text" class="col-form-label">Mois</label>#}
-                            {#<select id="inputState" class="form-control">#}
-                                {#<option>Janvier</option>#}
-                                {#<option>Février</option>#}
-                                {#<option>Mars</option>#}
-                                {#<option>Avril</option>#}
-                                {#<option>Mai</option>#}
-                                {#<option>Juin</option>#}
-                                {#<option>Juillet</option>#}
-                                {#<option>Aout</option>#}
-                                {#<option>Septembre</option>#}
-                                {#<option>Octobre</option>#}
-                                {#<option>Novembre</option>#}
-                                {#<option>Décembre</option>#}
-                            {#</select>#}
-                        {#</div>#}
-                    {#</div>#}
-
                     <div>
                     </div>
 
                 </form>
             </div>
 
-            {#<div class="card-footer">#}
-                {#<button type="button" class="btn btn-primary float-right" data-toggle="button" aria-pressed="false" autocomplete="off">#}
-                    {#Filtrer#}
-                {#</button>#}
 
-            {#</div>#}
 
         </div>
 
@@ -632,59 +587,69 @@
                     </div>
                     <div class="modal-body">
                         <form>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="recipient-name" class="col-form-label">Date *</label>
-                                    <div class='input-group date' id='datetimepicker1'>
-                                        <input type='text' class="form-control" />
-                                        <span class="input-group-addon icon">
+            <div class="col-sm-12">
+                <label for="recipient-name" class="col-form-label">Date *</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon icon">
                                                  <span class="fas fa-calendar"></span>
                                                  </span>
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+            </div>
 
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="message-text" class="col-form-label">Libelle frais *</label>
-                                    <input type="text" class="form-control" >
-                                </div>
 
-                                <div class="col-sm-6">
-                                    <label for="message-text" class="col-form-label">Type *</label>
-                                    <select id="inputState" class="form-control">
-                                        <option>Choix type frais</option>
-                                        <option>Repas personnel</option>
-                                        <option>Repas professionnel</option>
-                                        <option>Transport</option>
-                                        <option>Achat professionnel</option>
-                                        <option>Cadeau client</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="message-text" class="col-form-label">Montant TTC *</label>
-                                    <input type="text" class="form-control">
-                                </div>
 
-                                <div class="col-sm-6">
-                                    <label for="message-text" class="col-form-label">Taxe *</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <label for="message-text" class="col-form-label">Montant HT *</label>
-                                    <input type="text" class="form-control">
-                                </div>
+            <div class="col-sm-12">
+                <label for="message-text" class="col-form-label">Libelle frais *</label>
+                <input type="text" class="form-control" >
+            </div>
 
-                                <div class="col-sm-6">
-                                    <label for="message-text" class="col-form-label">Justificatif *</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
+            <div class="col-sm-12">
+                <label for="message-text" class="col-form-label">Type *</label>
+                <select id="inputState" class="form-control">
+                    <option>Choix type frais</option>
+                    <option>Repas personnel</option>
+                    <option>Repas professionnel</option>
+                    <option>Transport</option>
+                    <option>Achat professionnel</option>
+                    <option>Cadeau client</option>
+                </select>
+            </div>
+
+            <div class="col-sm-12">
+                <label for="message-text" class="col-form-label">Montant TTC *</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="message-text" class="col-form-label">Taxe *</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="message-text" class="col-form-label">Montant HT *</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="col-sm-12">
+                <label for="message-text" class="col-form-label">Justificatif *</label>
+                <input type="file" id="frais_justificatif" >
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="reder" class="mt-4">
+                {#<h3>visualisation de pdf</h3>#}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
                         </form>
                     </div>
 
