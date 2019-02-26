@@ -12,7 +12,7 @@
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item " href="#"  href="#" data-toggle="modal" data-target="#addFraisModal"><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+                    <a class="dropdown-item " href="{{ path('frais_new') }}"  ><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#genereNoteModal" genereNoteModal><i class="fas fa-file-excel"></i> &nbsp;Editer une note de frais</a>
                 </div>
             </div>
@@ -575,91 +575,6 @@
 
 
 
-        <!-- formulaire ajout de frais -->
-        <div class="modal fade" id="addFraisModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ajout frais</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        {{ form_start(form) }}
-                        {{ form_errors(form) }}
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-
-            <div class="col-sm-12">
-                {{ form_label(form.date, 'Date', {'label_attr': {'id': 'recipient-name'}}) }}
-
-                <div class='input-group date' id='datetimepicker1'>
-                    {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
-                    <span class="input-group-addon icon">
-                                                 <span class="fas fa-calendar"></span>
-                                                 </span>
-                </div>
-            </div>
-
-
-
-            <div class="col-sm-12">
-                {{ form_label(form.libelle,'Libelle frais *' )}}
-
-                {{ form_widget(form.libelle, {'attr': {'class': 'form-control'}}) }}
-            </div>
-
-            <div class="col-sm-12">
-                {{ form_label(form.type,'Type *' )}}
-                {{ form_widget(form.type, {'attr': {'class': 'form-control'}})}}
-            </div>
-
-            <div class="col-sm-12">
-                {{ form_label(form.montant_ttc,'Montant TTC *' )}}
-                {{ form_widget(form.montant_ttc, {'attr': {'class': 'form-control'}})}}
-
-            </div>
-
-            <div class="col-sm-12">
-                {{ form_label(form.taxe,'Taxe *' )}}
-                {{ form_widget(form.taxe, {'attr': {'class': 'form-control'}})}}
-            </div>
-
-            <div class="col-sm-12">
-                {{ form_label(form.montant_ht,'Montant HT *' )}}
-                {{ form_widget(form.montant_ht, {'attr': {'class': 'form-control'}})}}
-            </div>
-
-            <div class="col-sm-12">
-                {{ form_label(form.justificatif,'Justificatif *' )}}
-                {{ form_widget(form.justificatif,{'attr': {'id':'image_file'}})}}
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div id="reder" class="mt-4">
-                {#<h3>visualisation de pdf</h3>#}
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary'},'label':'Enregistrer'}) }}
-                        {{ form_rest(form) }}
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- fin formulaire ajout de frais -->
 
 
 

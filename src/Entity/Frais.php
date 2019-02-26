@@ -47,7 +47,13 @@ class Frais
    * @ORM\Column(type="string")
    */
     private $etat;
-    public function getId(): ?int
+
+    public function __construct()
+    {
+      $this->etat = "Brouillon";
+    }
+
+  public function getId(): ?int
     {
         return $this->id;
     }
@@ -112,12 +118,12 @@ class Frais
         return $this;
     }
 
-    public function getJustificatif(): ?string
+    public function getJustificatif()
     {
         return $this->justificatif;
     }
 
-    public function setJustificatif(string $justificatif): self
+    public function setJustificatif($justificatif)
     {
         $this->justificatif = $justificatif;
 

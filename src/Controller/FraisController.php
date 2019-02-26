@@ -19,21 +19,22 @@ class FraisController extends AbstractController
 {
   public function index(Request $request) :Response
   {
+    return $this->render('frais/frais.html.twig');
+  }
+
+  public function new(Request $request) :Response
+  {
     $em = $this->getDoctrine()->getManager();
     $frais = new Frais();
     $form = $this->createForm(FraisType::class,$frais);
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-
-//      $file = $form->get('justificatif')->getData();
-//      $fileName = $fileUploader->upload($file);
-//      $frais->setJustificatif($fileName);
-
+      $em->persist($frais);
+      $em->flush();
+      $this->addFlash('success','success !');
     }
-
-
-    return $this->render('frais/frais.html.twig',
+    return $this->render('frais/new.html.twig',
       [
         'form'=>$form->createView(),
       ]);

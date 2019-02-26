@@ -10,6 +10,16 @@ cra:
 frais :
     path: /frais
     controller: App\Controller\FraisController::index
+frais_new:
+    path: /frais/new
+    controller: App\Controller\FraisController::new
+
+
+
+
+
+
+
 facturation :
     path: /facturation
     controller: App\Controller\FacturationController::index
