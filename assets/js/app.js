@@ -62,7 +62,7 @@ $(document).ready(()=>{
 
     $('#datetimepicker1').datepicker({
     language:'fr',
-    format: 'dd/mm/yyyy',
+    format: 'dd-mm-yyyy',
 
     });
     $('#datetimepicker2').datepicker({
@@ -76,6 +76,10 @@ $('#filter').datepicker({
 
 
 });
+
+$("#recipient-name").change(function (e) {
+    console.log($("#recipient-namegit ").val());
+})
 });
 
 

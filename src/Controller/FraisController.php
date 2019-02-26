@@ -23,6 +23,16 @@ class FraisController extends AbstractController
     $frais = new Frais();
     $form = $this->createForm(FraisType::class,$frais);
     $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+
+//      $file = $form->get('justificatif')->getData();
+//      $fileName = $fileUploader->upload($file);
+//      $frais->setJustificatif($fileName);
+
+    }
+
+
     return $this->render('frais/frais.html.twig',
       [
         'form'=>$form->createView(),

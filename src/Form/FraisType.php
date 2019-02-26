@@ -18,6 +18,7 @@ class FraisType extends AbstractType
         $builder
             ->add('date',DateType::class,[
               'widget' => 'single_text',
+              'format' => 'dd-MM-yyyy',
               'html5' => false,
               'attr' => ['class' => 'datetimepicker1'],
             ])
