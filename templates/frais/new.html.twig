@@ -53,6 +53,7 @@
                         <div class="col-sm-12 mt-4">
                             {{ form_label(form.justificatif,'Justificatif *' )}}
                             {{ form_widget(form.justificatif,{'attr': {'id':'image_file'}})}}
+                            <small class="text-danger">{{ form_errors(form.justificatif) }}</small>
                         </div>
                     </div>
                     <div class="col-md-6">

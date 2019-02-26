@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FraisRepository")
@@ -37,6 +38,10 @@ class Frais
     private $montant_ht;
   /**
    * @ORM\Column(type="string")
+   * @Assert\File(
+   *     mimeTypes = {"application/pdf", "application/x-pdf"},
+   *     mimeTypesMessage = "Le fichier selectionnée n'est pas un PDF"
+   * )
    */
     private $justificatif;
   /**
