@@ -18,6 +18,18 @@ class FraisRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Frais::class);
     }
+  public function findByDate($start, $end='2019-02-28')
+  {
+
+    $entityManager = $this->getEntityManager();
+    $q = $entityManager->createQuery('
+    SELECT f FROM App\Entity\Frais f WHERE f.date BETWEEN :start and :end 
+    ')->setParameter('start',$start)->setParameter('end',$end);
+    return $q->execute();
+  }
+
+
+
 
     // /**
     //  * @return Frais[] Returns an array of Frais objects

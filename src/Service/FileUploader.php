@@ -22,6 +22,7 @@ class FileUploader
    */
   private $fileSysteme;
   private $dir;
+  private $path;
 
   public function __construct($directory)
   {
@@ -37,7 +38,7 @@ class FileUploader
     }catch (UploadException $exception){
       //ici les exception
     }
-    return $fileName;
+    return $this->path.'/'.$fileName;
   }
 
   /**
@@ -66,6 +67,12 @@ class FileUploader
       $this->dir = $dir.'/'.$date->format('Y').'/'.$date->format('m');
 
     }
-    return $this->dir;
+
+    $this->path =  $date->format('Y').'/'.$date->format('m');
+
+
+    return $this->path;
+
+
   }
 }

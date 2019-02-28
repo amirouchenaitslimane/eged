@@ -13,7 +13,12 @@ frais :
 frais_new:
     path: /frais/new
     controller: App\Controller\FraisController::new
-
+frais_edit:
+    path: /frais/edit/{id}
+    controller: App\Controller\FraisController::edit
+frais_delete:
+    path: /frais/delete/{id}
+    controller: App\Controller\FraisController::delete
 
 
 
