@@ -43,16 +43,16 @@
                     </div>
 
                     <div class="col-sm-12 mt-4">
-                        {{ form_label(form.justificatif,'Justificatif *' )}}
-                        {{ form_widget(form.justificatif,{'attr': {'id':'image_file'}})}}
-                        <small class="text-danger">{{ form_errors(form.justificatif) }}</small>
+                        {{ form_label(form.fichier,'Justificatif *' )}}
+                        {{ form_widget(form.fichier,{'attr': {'id':'image_file'}})}}
+                        <small class="text-danger">{{ form_errors(form.fichier) }}</small>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div id="reder" class="mt-4">
                         {% if frais is defined %}
                             <div id="reder_2" class="mt-4">
-                                <object data="{{ asset('GED/NDF/' ~ frais.justificatif ) }}" type="application/pdf" width="100%" height="440px">
+                                <object data=" {{ vich_uploader_asset(frais, 'fichier') }}" type="application/pdf" width="100%" height="440px">
 
                                 </object>
                             </div>

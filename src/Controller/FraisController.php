@@ -103,7 +103,10 @@ class FraisController extends AbstractController
   }
   public function delete(Request $request,$id)
   {
-
-    return $this->render('frais/delete.html.twig');
+    $frais = $this->em()->getRepository(Frais::class)->find($id);
+    $this->em()->remove($frais);
+    $this->em()->flush();
+    $this->addFlash('danger','frais deleted ! ');
+    return $this->redirectToRoute('frais');
   }
 }

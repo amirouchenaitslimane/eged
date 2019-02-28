@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FraisRepository")
+ * @Vich\Uploadable
  */
 class Frais
 {
@@ -37,11 +40,13 @@ class Frais
    */
     private $montant_ht;
   /**
+   * @var File
+   * @Vich\UploadableField(mapping="ged", fileNameProperty="justificatif")
+   */
+    private $fichier;
+  /**
    * @ORM\Column(type="string")
-   * @Assert\File(
-   *     mimeTypes = {"application/pdf", "application/x-pdf"},
-   *     mimeTypesMessage = "Le fichier selectionnée n'est pas un PDF"
-   * )
+   *
    */
     private $justificatif;
   /**
@@ -52,6 +57,12 @@ class Frais
    * @ORM\Column(type="string")
    */
     private $etat;
+  /**
+   * @ORM\Column(type="datetime",nullable=true)
+   *
+   * @var \DateTime
+   */
+  private $updatedAt;
 
     public function __construct()
     {
@@ -123,17 +134,7 @@ class Frais
         return $this;
     }
 
-    public function getJustificatif()
-    {
-        return $this->justificatif;
-    }
 
-    public function setJustificatif($justificatif)
-    {
-        $this->justificatif = $justificatif;
-
-        return $this;
-    }
 
 
 
@@ -160,4 +161,45 @@ class Frais
 
         return $this;
     }
+
+  public function setFichier(File $fichier = null)
+  {
+    $this->fichier = $fichier;
+
+    if (null !== $fichier) {
+      // It is required that at least one field changes if you are using doctrine
+      // otherwise the event listeners won't be called and the file is lost
+      $this->updatedAt = new \DateTimeImmutable();
+    }
+
+  }
+
+  public function getFichier()
+  {
+    return $this->fichier;
+  }
+
+  public function getJustificatif()
+  {
+    return $this->justificatif;
+  }
+
+  public function setJustificatif($justificatif)
+  {
+    $this->justificatif = $justificatif;
+
+    return $this;
+  }
+
+  public function getUpdatedAt(): ?\DateTimeInterface
+  {
+      return $this->updatedAt;
+  }
+
+  public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+  {
+      $this->updatedAt = $updatedAt;
+
+      return $this;
+  }
 }

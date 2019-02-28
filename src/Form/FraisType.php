@@ -34,7 +34,7 @@ class FraisType extends AbstractType
           ])
             ->add('montant_ttc')
             ->add('montant_ht')
-            ->add('justificatif',FileType::class,[
+            ->add('fichier',FileType::class,[
               'data_class' => null
             ])
             ->add('taxe')

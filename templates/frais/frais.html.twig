@@ -99,11 +99,12 @@
                                 <td>{{ f.taxe }} %</td>
                                 <td>{{ f.montantHt }} €</td>
                                 <td><span class="badge badge-{{ f.etat }}">{{ f.etat }} </span></td>
-                                <td><a href="{{ asset('GED/NDF/' ~ f.justificatif ) }}"><i class="far fa-file-pdf"></i></a></td>
+                                <td><a target="_blank" href="{{ vich_uploader_asset(f, 'fichier') }}"><i class="far fa-file-pdf"></i></a></td>
+
 
                                 <td>
                                     <a href="{{ path('frais_edit',{id: f.id}) }}"><i class="fas fa-edit text-primary"></i></a>&nbsp;
-                                    <a href="" onclick="confirm('Suprimer ? ')"><i class="far fa-trash-alt text-danger"></i></a>
+                                    <a href="{{ path('frais_delete',{id: f.id}) }}" onclick="confirm('Suprimer ? ')"><i class="far fa-trash-alt text-danger"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}
