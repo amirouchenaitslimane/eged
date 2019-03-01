@@ -10,22 +10,60 @@ namespace App\Twig;
 
 
 use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
 use Twig\TwigFunction;
+
 
 class AppExtension extends AbstractExtension
 {
+
   public function getFilters()
   {
-    return [
-      new TwigFunction('dossier', [$this, 'getDirectory']),
+    return[
+      new TwigFilter('badge',
+        [$this,'badgeFilter'],
+        ['is_safe'=>['html']]
+      )
+      
     ];
   }
 
-  public function getDirectory($date)
+  public function getFunctions()
   {
-    $date = explode('/',$date);
-    $dir = $date[1].'/'.$date[2].'/';
-    return $dir;
-
+    return [
+      new TwigFunction('formatType',[$this,'formateType'], ['is_safe'=>['html']]),
+      new TwigFunction('totalTtc',[$this,'TotalTtc'], ['is_safe'=>['html']])
+    ];
   }
+  
+  
+  public function badgeFilter($etat)
+  {
+    $t = "";
+    if($etat == 'Brouillon'){
+      $t .= "badge-danger";
+    }elseif ($etat == 'Envoyee'){
+      $t .= "badge-success";
+    }
+
+    return "<span class='badge ".$t." p-2'>".$etat."</span>";
+  }
+
+
+  public function formateType($type)
+  {
+    $string = str_replace('_',' ',$type);
+    return ucfirst($string);
+  }
+
+  public function totalTtc($objet)
+  {
+    $ttc = 0;
+    foreach ($objet as $frai) {
+      $ttc += $frai->getMontantTtc();
+    }
+    return $ttc.' €';
+  }
+
+
 }

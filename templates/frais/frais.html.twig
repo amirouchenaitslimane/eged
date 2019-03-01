@@ -78,7 +78,7 @@
                             <th>Totaux</th>
                             <th></th>
                             <th></th>
-                            <th>1000€</th>
+                            <th>{{ totalTtc(frais) }}</th>
                             <th>1000€</th>
                             <th>1000€ </th>
                             <th></th>
@@ -92,13 +92,14 @@
                             <tr>
 
 
-                                <td><span class="font-weight-bold">{{ f.date | date('Y-m-d') }}</span></td>
+                                <td><span class="font-weight-bold">{{ f.date | date('d-m-Y') }}</span></td>
                                 <td>{{ f.libelle }}</td>
-                                <td>{{ f.type }}</td>
+                                <td>{{ formatType(f.type)  }}</td>
                                 <td>{{ f.montantTtc }} €</td>
                                 <td>{{ f.taxe }} %</td>
                                 <td>{{ f.montantHt }} €</td>
-                                <td><span class="badge badge-{{ f.etat }}">{{ f.etat }} </span></td>
+                                {#<td><span class="badge badge-{{ f.etat }}">{{ f.etat }} </span></td>#}
+                                <td>{{ f.etat | badge }}</td>
                                 <td><a target="_blank" href="{{ vich_uploader_asset(f, 'fichier') }}"><i class="far fa-file-pdf"></i></a></td>
 
 

@@ -39,3 +39,6 @@ services:
         arguments: ['%ged_directory%']
         public: true
 
+#les Services de twig ici
+    App\Twig\AppExtension:
+        tags: ['twig.extension','twig.function']
