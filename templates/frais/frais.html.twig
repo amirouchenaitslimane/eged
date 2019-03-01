@@ -105,7 +105,7 @@
 
                                 <td>
                                     <a href="{{ path('frais_edit',{id: f.id}) }}"><i class="fas fa-edit text-primary"></i></a>&nbsp;
-                                    <a href="{{ path('frais_delete',{id: f.id}) }}" onclick="confirm('Suprimer ? ')"><i class="far fa-trash-alt text-danger"></i></a>
+                                    <a href="{{ path('frais_delete',{id: f.id}) }}" onclick="return confirm('Etes-vous sur de vouloir supprimer ce enregistrement ? ')"><i class="far fa-trash-alt text-danger"></i></a>
                                 </td>
                             </tr>
                         {% endfor %}

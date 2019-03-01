@@ -47,8 +47,10 @@ let option_tables={
 let option_calendar = {
     language:'fr',
     format: 'dd/mm/yyyy',
-}
-$('#frais').DataTable(option_tables);
+    setDate: new Date()
+};
+ $('#frais').DataTable(option_tables);
+
 $(document).ready(()=>{
     //console.log('hola depuis le encore');
     $("#sidebarToggle").on('click', function(e) {
@@ -63,8 +65,8 @@ $(document).ready(()=>{
     $('#datetimepicker1').datepicker({
     language:'fr',
     format: 'dd-mm-yyyy',
-
-    });
+    autoclose: true,
+    }).datepicker('setDate', 'today');
     $('#datetimepicker2').datepicker({
         language:'fr',
         format: 'mm-yyyy',
@@ -83,7 +85,7 @@ $("#recipient-name").change(function (e) {
 });
 
 
-$("#frais_justificatif").change(function () {
+$("#frais_fichier").change(function () {
 
     var ext = getFileExtension(this.files[0].name);
 
