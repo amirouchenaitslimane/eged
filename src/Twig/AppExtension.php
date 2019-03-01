@@ -32,7 +32,8 @@ class AppExtension extends AbstractExtension
   {
     return [
       new TwigFunction('formatType',[$this,'formateType'], ['is_safe'=>['html']]),
-      new TwigFunction('totalTtc',[$this,'TotalTtc'], ['is_safe'=>['html']])
+      new TwigFunction('totalTtc',[$this,'TotalTtc'], ['is_safe'=>['html']]),
+      new TwigFunction('totalHt',[$this,'TotalHt'], ['is_safe'=>['html']])
     ];
   }
   
@@ -64,6 +65,13 @@ class AppExtension extends AbstractExtension
     }
     return $ttc.' €';
   }
-
+  public function totalHt($objet)
+  {
+    $ht = 0;
+    foreach ($objet as $frai) {
+      $ht += $frai->getMontantHt();
+    }
+    return $ht.' €';
+  }
 
 }

@@ -16,9 +16,13 @@ frais_new:
 frais_edit:
     path: /frais/edit/{id}
     controller: App\Controller\FraisController::edit
+    requirements:
+        page: '\d+'
 frais_delete:
     path: /frais/delete/{id}
     controller: App\Controller\FraisController::delete
+    requirements:
+        page: '\d+'
 
 
 
