@@ -70,10 +70,10 @@
     <div class="float-right">
 
         {{ form_row(form.submit, {'attr': {'class': 'btn btn-primary'},'label':'Enregistrer'}) }}
-
     </div>
+    <a href="{{ path('frais') }}" class="btn btn-success float-left">Retour a la liste des frais </a>
 
 </div>
 {{ form_rest(form) }}
-            {{ form_end(form) }}
+{{ form_end(form) }}
 </div>
