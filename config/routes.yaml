@@ -23,6 +23,12 @@ frais_delete:
     controller: App\Controller\FraisController::delete
     requirements:
         page: '\d+'
+frais_duplique:
+    path: /frais/duplique/{id}
+    controller: App\Controller\FraisController::dupliquer
+    requirements:
+        page: '\d+'
+
 
 
 

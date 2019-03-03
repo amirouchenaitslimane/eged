@@ -14,6 +14,7 @@ use App\Form\FraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class FraisController extends AbstractController
 {
@@ -56,21 +57,30 @@ class FraisController extends AbstractController
    * @param Request $request
    * @return Response
    */
-  public function new(Request $request) :Response
+  public function new(Request $request,ValidatorInterface $validator) :Response
   {
     $em = $this->getDoctrine()->getManager();
     $frais = new Frais();
     $form = $this->createForm(FraisType::class,$frais);
     $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-      $em->persist($frais);
-      $em->flush();
-      $this->addFlash('success','La Note De Frais A Été Crée Avec Succee !');
+    if ($form->isSubmitted()) {
+      $error = $validator->validate($frais);
+      if($form->isValid()){
+        $em->persist($frais);
+        $em->flush();
+        $this->addFlash('success','La not de frais a été crée avec succès !');
+      }else{
+        $this->addFlash('danger','La not de frais non enregistre !');
+      }
+
+    }else{
+      $error = null;
     }
     return $this->render('frais/new.html.twig',
       [
         'form'=>$form->createView(),
+        'errors'=>$error,
       ]);
   }
 
@@ -81,22 +91,33 @@ class FraisController extends AbstractController
    * @return Response
    */
 
-  public function edit(Request $request,$id)
+  public function edit(Request $request,$id,ValidatorInterface $validator)
   {
     $frais = $this->em()->getRepository(Frais::class)->find($id);
 
     if(!$frais){
-      throw $this->createNotFoundException('Frais Demander N\'existe Pas ');
+      throw $this->createNotFoundException('frais demander n\'existe pas ');
     }
+    //$error = null;
     $form = $this->createForm(FraisType::class,$frais);
     $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-      $this->em()->persist($frais);
-      $this->em()->flush();
-      $this->addFlash('success','success !');
+
+    if ($form->isSubmitted() ) {
+      $error = $validator->validate($frais);
+      if($form->isValid()){
+        $this->em()->persist($frais);
+        $this->em()->flush();
+        $this->addFlash('success','La note de frais a été actualisée avec succés !');
+      }else{
+        $this->addFlash('danger','La note de frais na pas été actualisée  !');
+      }
+
+    }else{
+      $error = null;
     }
     return $this->render('frais/edit.html.twig',[
       'form'=>$form->createView(),
+      'errors'=>$error,
       'frais'=>$frais,
     ]);
   }
@@ -112,11 +133,26 @@ class FraisController extends AbstractController
   {
     $frais = $this->em()->getRepository(Frais::class)->find($id);
     if(!$frais){
-      throw $this->createNotFoundException('Frais Demander N\'existe Pas ');
+      throw $this->createNotFoundException('frais demander n\'existe pas ');
     }
     $this->em()->remove($frais);
     $this->em()->flush();
-    $this->addFlash('danger','frais deleted ! ');
+    $this->addFlash('success','La note de frais a été eliminée avec succès !');
     return $this->redirectToRoute('frais');
   }
+
+
+  public function dupliquer(Request $request ,$id)
+  {
+    $frais_new = new Frais();
+    $frais = $this->em()->getRepository(Frais::class)->find($id);
+    $form = $this->createForm(FraisType::class,$frais);
+    $form->handleRequest($request);
+    return $this->render('frais/duplique.html.twig',[
+     'form'=>$form->createView(),
+      'frais'=>$frais
+    ]);
+  }
+
+
 }

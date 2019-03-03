@@ -33,7 +33,8 @@ class AppExtension extends AbstractExtension
     return [
       new TwigFunction('formatType',[$this,'formateType'], ['is_safe'=>['html']]),
       new TwigFunction('totalTtc',[$this,'TotalTtc'], ['is_safe'=>['html']]),
-      new TwigFunction('totalHt',[$this,'TotalHt'], ['is_safe'=>['html']])
+      new TwigFunction('totalHt',[$this,'TotalHt'], ['is_safe'=>['html']]),
+      new TwigFunction('totalTaxe',[$this,'totalTaxe'], ['is_safe'=>['html']])
     ];
   }
   
@@ -74,4 +75,12 @@ class AppExtension extends AbstractExtension
     return $ht.' €';
   }
 
+  public function totalTaxe($frais)
+  {
+    $taxe = 0;
+    foreach ($frais as $frai) {
+      $taxe += $frai->getTaxe();
+    }
+    return $taxe;
+  }
 }

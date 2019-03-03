@@ -20,6 +20,7 @@ class Frais
      */
     private $id;
   /**
+   * @Assert\Date(message="la date n'est pa valide")
    * @ORM\Column(type="date",nullable=false)
    */
     private $date;
@@ -32,6 +33,10 @@ class Frais
    */
     private $type;
   /**
+   * @Assert\Type(
+   *     type="float",
+   *     message="La valeur introduite v'est pas valide."
+   * )
    * @ORM\Column(type="decimal")
    */
     private $montant_ttc;
@@ -42,14 +47,22 @@ class Frais
   /**
    * @var File
    * @Vich\UploadableField(mapping="ged", fileNameProperty="justificatif")
+   *
+   * @Assert\File(mimeTypes={ "application/pdf" })
    */
     private $fichier;
   /**
+   *
    * @ORM\Column(type="string")
    *
    */
     private $justificatif;
   /**
+   * @Assert\NotBlank(message="La taxe est obligatoirement rempli")
+   * @Assert\Type(
+   *     type="float",
+   *     message="la valeur introduite doit etre flottante."
+   * )
    * @ORM\Column(type="decimal")
    */
     private $taxe;

@@ -3,8 +3,15 @@
 {% block body %}
     <div class="container-fluid">
         <div class="card mb-3">
-            <div class="card-header">
-                <h3>Ajout frais</h3>
-               </div>
+
+
+    <div class="card-header">
+       <div class="row">
+           <div class="col-md-12">
+           <h3 class="float-left">Ajout de frais</h3>
+              <a href="{{ path('frais') }}" class="text-success float-right"><< Retour a la liste des frais</a>
+          </div>
+       </div>
+    </div>
     {% include 'frais/form_frais.html.twig' %}
 {% endblock %}

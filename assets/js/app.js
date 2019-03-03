@@ -47,7 +47,7 @@ let option_tables={
 let option_calendar = {
     language:'fr',
     format: 'dd/mm/yyyy',
-    setDate: new Date()
+
 };
  $('#frais').DataTable(option_tables);
 
@@ -66,7 +66,7 @@ $(document).ready(()=>{
     language:'fr',
     format: 'dd-mm-yyyy',
     autoclose: true,
-    }).datepicker('setDate', 'today');
+    });
     $('#datetimepicker2').datepicker({
         language:'fr',
         format: 'mm-yyyy',
@@ -119,3 +119,21 @@ function getFileExtension(filename) {
     return filename.split('.').pop();
 }
 
+// Scroll to top button appear
+$(document).on('scroll', function() {
+    var scrollDistance = $(this).scrollTop();
+    if (scrollDistance > 80) {
+        $('.scroll-to-top').fadeIn();
+    } else {
+        $('.scroll-to-top').fadeOut();
+    }
+});
+
+// Smooth scrolling using jQuery easing
+$(document).on('click', 'a.scroll-to-top', function(event) {
+    var $anchor = $(this);
+    $('html, body').stop().animate({
+        scrollTop: ($($anchor.attr('href')).offset().top)
+    }, 1000, 'easeInOutExpo');
+    event.preventDefault();
+});

@@ -4,7 +4,7 @@ vich_uploader:
     mappings:
         ged:
             uri_prefix: /GED/NDF
-            upload_destination: '%kernel.project_dir%/../DB/GED/NDF'
+            upload_destination: '%kernel.project_dir%/public/GED/NDF'
             #upload_destination: '%kernel.project_dir%/../DB/GED'
             directory_namer: App\Service\DirectoryNamer
             inject_on_load: false
