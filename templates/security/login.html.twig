@@ -4,21 +4,36 @@
     <div class="card card-login mx-auto mt-5">
         <div class="card-header">Login</div>
         <div class="card-body">
-            <form>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="text" id="utilisateur" class="form-control" placeholder="Login ..." required="required" autofocus="autofocus">
-                        <label for="utilisateur">Login:</label>
-                    </div>
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
                 </div>
-                <div class="form-group">
-                    <div class="form-label-group">
-                        <input type="password" id="inputPassword" class="form-control" placeholder="mot de pass" required="required">
-                        <label for="inputPassword">Mot de passe</label>
-                    </div>
+            {% endif %}
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+
+                <div style="color: green;margin-top: 50px;margin-bottom: 50px ">
+                    {{ flashMessage }}
                 </div>
 
-                <a class="btn btn-primary btn-block" href="index.html">Login</a>
+            {% endfor %}
+            <form action="{{ path('security_login') }}" method="post">
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="text" id="utilisateur" class="form-control" placeholder="Username ..." required="required" autofocus="autofocus" name="_username" value="{{ last_username }}">
+                        <label for="utilisateur">Username</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" name="_password" class="form-control" placeholder="mot de pass" required="required">
+                        <label for="inputPassword">Mot de passe</label>
+                    </div>
+                    <input type="hidden" name="_target_path" value="{{ app.request.get('redirect_to') }}"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                </div>
+
+                <button class="btn btn-primary btn-block" >Login</button>
             </form>
 
         </div>

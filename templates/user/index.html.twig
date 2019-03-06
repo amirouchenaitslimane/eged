@@ -5,14 +5,75 @@
         <!-- Breadcrumbs-->
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="index.html.twig">Dashboard</a>
+                <a href="{{ path('index') }}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Blank Page</li>
+            <li class="breadcrumb-item active">Utilisateurs</li>
         </ol>
-
-        <!-- Page Content -->
-        <h1>Blank Page</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group float-right" >
+                    <button type="button" class="btn btn-secondary">Action</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item " href="{{ path('user_new') }}"  ><i class="fas fa-plus"></i> &nbsp;Ajouter</a>
+                         </div>
+                </div>
+            </div>
+        </div>
         <hr>
-        <p>This is a great starting point for new custom pages.</p>
+
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Les utilisateurs</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table" id="User_table" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Roles</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>
+                                Roles
+                            </th>
+                        </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.nom }}</td>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>
+                                    {% for role in user.roles  %}
+                                        <span>{{ role }}</span>
+                                    {% endfor %}
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+
     </div>
 {% endblock %}

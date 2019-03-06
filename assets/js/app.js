@@ -50,7 +50,7 @@ let option_calendar = {
 
 };
  $('#frais').DataTable(option_tables);
-
+$('#User_table').DataTable(option_tables);
 $(document).ready(()=>{
     //console.log('hola depuis le encore');
     $("#sidebarToggle").on('click', function(e) {
