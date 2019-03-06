@@ -14,6 +14,7 @@ use App\Form\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
@@ -26,10 +27,21 @@ class UserController extends AbstractController
     ]);
   }
 
-  public function new(Request $request)
+  public function new(Request $request,UserPasswordEncoderInterface $passwordEncoder)
   {
     $user = new Utilisateur();
     $form = $this->createForm(UtilisateurType::class,$user);
+    $form->handleRequest($request);
+    if($form->isSubmitted() && $form->isValid()){
+      $em = $this->getDoctrine()->getManager();
+      $user->setPassword($passwordEncoder->encodePassword($user,$user->getPassword()));
+      $roles = $form->get('roles')->getData();
+      $user->setRoles($roles);
+      $em->persist($user);
+      $em->flush();
+      $this->addFlash('success','L\'utilisateur a été créé avec succès !');
+      return $this->redirectToRoute('user');
+    }
     return $this->render('user/new.html.twig',[
     'form_user'=>$form->createView(),
     ]);
