@@ -52,4 +52,22 @@ class UserController extends AbstractController
     'form_user'=>$form->createView(),
     ]);
   }
+
+
+  public function edit(Request $request,$id): Response
+  {
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository(Utilisateur::class)->find($id);
+    $form = $this->createForm(UtilisateurType::class, $user);
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()) {
+      $this->getDoctrine()->getManager()->flush();
+      $this->addFlash('success', 'updated');
+      return $this->redirectToRoute('user');
+    }
+    return $this->render('user/edit.html.twig', [
+      'user' => $user,
+      'form_user' => $form->createView(),
+    ]);
+  }
 }

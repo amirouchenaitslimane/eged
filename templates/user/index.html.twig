@@ -39,6 +39,7 @@
                             <th>Email</th>
                             <th>Username</th>
                             <th>Roles</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -50,6 +51,7 @@
                             <th>
                                 Roles
                             </th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -63,6 +65,9 @@
                                     {% for role in user.roles  %}
                                         <span>{{ role }}</span>
                                     {% endfor %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('user_edit',{ id: user.id }) }}" title="edit"><i class="fas fa-edit text-primary"></i></a>
                                 </td>
 
                             </tr>
