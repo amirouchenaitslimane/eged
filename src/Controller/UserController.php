@@ -32,14 +32,20 @@ class UserController extends AbstractController
     $user = new Utilisateur();
     $form = $this->createForm(UtilisateurType::class,$user);
     $form->handleRequest($request);
-    if($form->isSubmitted() && $form->isValid()){
-      $em = $this->getDoctrine()->getManager();
-      $user->setPassword($passwordEncoder->encodePassword($user,$user->getPassword()));
-      $roles = $form->get('roles')->getData();
-      $user->setRoles($roles);
-      $em->persist($user);
-      $em->flush();
-      $this->addFlash('success','L\'utilisateur a été créé avec succès !');
+    if($form->isSubmitted()){
+      if($form->isValid()){
+        $em = $this->getDoctrine()->getManager();
+        $user->setPassword($passwordEncoder->encodePassword($user,$user->getPassword()));
+        $roles = $form->get('roles')->getData();
+        $user->setRoles($roles);
+        $em->persist($user);
+        $em->flush();
+        $this->addFlash('success','L\'utilisateur a été créé avec succès !');
+
+      }else{
+        $this->addFlash('danger','L\'utilisateur n\' a pas été créé ');
+
+      }
       return $this->redirectToRoute('user');
     }
     return $this->render('user/new.html.twig',[
