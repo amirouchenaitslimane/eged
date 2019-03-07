@@ -23,8 +23,11 @@ class AppExtension extends AbstractExtension
       new TwigFilter('badge',
         [$this,'badgeFilter'],
         ['is_safe'=>['html']]
+      ),
+      new TwigFilter('badge_user',
+        [$this,'badgeUserFilter'],
+        ['is_safe'=>['html']]
       )
-      
     ];
   }
 
@@ -34,7 +37,9 @@ class AppExtension extends AbstractExtension
       new TwigFunction('formatType',[$this,'formateType'], ['is_safe'=>['html']]),
       new TwigFunction('totalTtc',[$this,'TotalTtc'], ['is_safe'=>['html']]),
       new TwigFunction('totalHt',[$this,'TotalHt'], ['is_safe'=>['html']]),
-      new TwigFunction('totalTaxe',[$this,'totalTaxe'], ['is_safe'=>['html']])
+      new TwigFunction('totalTaxe',[$this,'totalTaxe'], ['is_safe'=>['html']]),
+     new TwigFunction('format_etat_user',[$this,'formatEtatUser'], ['is_safe'=>['html']])
+
     ];
   }
   
@@ -82,5 +87,29 @@ class AppExtension extends AbstractExtension
       $taxe += $frai->getTaxe();
     }
     return $taxe;
+  }
+
+  public function badgeUserFilter($user)
+  {
+    $t = "";
+    if($user->getEtat() == 1){
+      $t.="alert-success";
+    }elseif($user->getEtat() == 0){
+      $t.="alert-danger";
+    }
+
+    return "<span class='badge ".$t." p-2'>".$this->formatEtatUser($user)."</span>";
+
+  }
+
+  public function formatEtatUser($user)
+  {
+    $str = "";
+    if($user->getEtat() == 0){
+      $str .= "Inactif";
+    }else{
+      $str .= "Actif";
+    }
+    return $str;
   }
 }

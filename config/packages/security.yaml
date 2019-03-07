@@ -13,6 +13,7 @@ security:
             security: false
         main:
             pattern: ^/
+            user_checker: App\Security\UserChecker
             anonymous: true
             form_login:
                 check_path: security_login

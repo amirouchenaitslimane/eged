@@ -39,7 +39,7 @@
                             <th>Email</th>
                             <th>Username</th>
                             <th>Roles</th>
-
+                             <th>Etat</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -68,7 +68,7 @@
                                         <span>{{ role }}</span>
                                     {% endfor %}
                                 </td>
-
+                               <td><span class="badge badge-{% if(user.etat == 0) %}danger{% else %}success{% endif %}">{{ format_etat_user(user) }}</span></td>
                                 <td>
                                     <a href="{{ path('user_edit',{ id: user.id }) }}" title="Editer"><i class="fas fa-edit text-primary"></i></a>
                                     <a href="{{ path('user_delete',{ id: user.id }) }}" title="Eliminer"><i class="fas fa-trash text-danger"></i></a>
@@ -86,5 +86,4 @@
 
     </div>
 {% endblock %}
-
 
