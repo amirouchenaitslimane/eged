@@ -39,6 +39,7 @@
                             <th>Email</th>
                             <th>Username</th>
                             <th>Roles</th>
+
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -51,6 +52,7 @@
                             <th>
                                 Roles
                             </th>
+
                             <th>Action</th>
                         </tr>
                         </tfoot>
@@ -66,8 +68,10 @@
                                         <span>{{ role }}</span>
                                     {% endfor %}
                                 </td>
+
                                 <td>
-                                    <a href="{{ path('user_edit',{ id: user.id }) }}" title="edit"><i class="fas fa-edit text-primary"></i></a>
+                                    <a href="{{ path('user_edit',{ id: user.id }) }}" title="Editer"><i class="fas fa-edit text-primary"></i></a>
+                                    <a href="{{ path('user_delete',{ id: user.id }) }}" title="Eliminer"><i class="fas fa-trash text-danger"></i></a>
                                 </td>
 
                             </tr>
@@ -82,3 +86,5 @@
 
     </div>
 {% endblock %}
+
+

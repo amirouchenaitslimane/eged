@@ -60,6 +60,11 @@ user_edit:
     controller: App\Controller\UserController::edit
     requirements:
         id: '\d+'
+user_delete:
+    path: /user/delete/{id}
+    controller: App\Controller\UserController::delete
+    requirements:
+        id: '\d+'
 
 profil :
     path: /profil

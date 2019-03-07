@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Utilisateur;
-use App\Form\UtilisateurType;
+
+use App\Form\Security\EditType;
+use App\Form\Security\UtilisateurType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,15 +56,30 @@ class UserController extends AbstractController
   }
 
 
-  public function edit(Request $request,$id): Response
+  public function edit(Request $request,UserPasswordEncoderInterface $encoder,$id): Response
   {
     $em = $this->getDoctrine()->getManager();
     $user = $em->getRepository(Utilisateur::class)->find($id);
-    $form = $this->createForm(UtilisateurType::class, $user);
+    if(!$user){
+      throw $this->createNotFoundException('Utilisateur demander n\'existe pas ');
+    }
+
+    $mot_de_passe_origine = $user->getPassword();
+    $form = $this->createForm(EditType::class, $user);
     $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-      $this->getDoctrine()->getManager()->flush();
-      $this->addFlash('success', 'updated');
+    if ($form->isSubmitted()) {
+      $user = $form->getData();
+      $pwd = $user->getPassword() ? $encoder->encodePassword($user, $user->getPassword()) : $mot_de_passe_origine;
+       $user->setPassword($pwd);
+      if($form->isValid()){
+        $em->persist($user);
+        $em->flush();
+     $this->addFlash('success', 'L\'utilisateur a été actualisé avec succès !');
+
+  }else{
+        $this->addFlash('danger', 'L\'utilisateur n\'a pas été actualisé  !');
+
+      }
       return $this->redirectToRoute('user');
     }
     return $this->render('user/edit.html.twig', [
@@ -70,4 +87,20 @@ class UserController extends AbstractController
       'form_user' => $form->createView(),
     ]);
   }
+
+  public function delete(Request $request,$id)
+  {
+    $em = $this->getDoctrine()->getManager();
+     $user = $em->getRepository(Utilisateur::class)->find($id);
+    if(!$user){
+      throw $this->createNotFoundException('Utilisateur demander n\'existe pas ');
+    }
+    $em->remove($user);
+    $em->flush();
+    $this->addFlash('success','L\'utilisateur a été eliminée avec succès !');
+    return $this->redirectToRoute('user');
+  }
+
+
+
 }

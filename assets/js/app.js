@@ -52,6 +52,8 @@ let option_calendar = {
  $('#frais').DataTable(option_tables);
 $('#User_table').DataTable(option_tables);
 $(document).ready(()=>{
+
+
     //console.log('hola depuis le encore');
     $("#sidebarToggle").on('click', function(e) {
         e.preventDefault();
@@ -137,3 +139,4 @@ $(document).on('click', 'a.scroll-to-top', function(event) {
     }, 1000, 'easeInOutExpo');
     event.preventDefault();
 });
+

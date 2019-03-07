@@ -49,7 +49,7 @@ class Utilisateur implements UserInterface,\Serializable
    * @var string
    *
    * @ORM\Column(type="string")
-   * @Assert\NotBlank()
+   *
    */
     private $password;
     /**
