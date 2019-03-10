@@ -34,6 +34,7 @@ class EditType extends AbstractType
           ),
           'mapped'=>false,
           'multiple' => true,
+          'expanded'=>true,
           'required'=>false
         ))
         ->add('etat')
