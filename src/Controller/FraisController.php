@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Entity\Frais;
+use App\Form\FraisDupliqueType;
 use App\Form\FraisType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -146,11 +147,12 @@ class FraisController extends AbstractController
   {
     $frais_new = new Frais();
     $frais = $this->em()->getRepository(Frais::class)->find($id);
-    $form = $this->createForm(FraisType::class,$frais);
+    $form = $this->createForm(FraisDupliqueType::class,$frais);
     $form->handleRequest($request);
     return $this->render('frais/duplique.html.twig',[
      'form'=>$form->createView(),
-      'frais'=>$frais
+      'frais'=>$frais,
+
     ]);
   }
 
