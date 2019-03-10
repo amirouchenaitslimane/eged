@@ -1,6 +1,26 @@
 <div class="card-body">
     <div class="col-sm-8">
         {{ form_start(form_user) }}
-        {{ form_end(form_user) }}
+        {{ form_row(form_user.nom) }}
+        {{ form_row(form_user.prenom) }}
+        {{ form_row(form_user.email) }}
+        {{ form_row(form_user.username) }}
+
+        {{ form_row(form_user.password) }}
+        {{ form_row(form_user.roles) }}
+        {{ form_row(form_user.etat) }}
+
+
+
+
+
     </div>
+</div>
+<div class="card-footer">
+    <a href="{{ path('user') }}" class="btn btn-success float-left"><< Retour a la liste des utilisateurs</a>
+    <div class="float-right">
+        {{ form_row(form_user.save) }}
+
+    </div>
+    {{ form_end(form_user) }}
 </div>
