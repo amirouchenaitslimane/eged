@@ -1,0 +1,71 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Clients{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Menu action -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group float-right" >
+                    <button type="button" class="btn btn-secondary">Action</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item " href="{{ path('client_new') }}"  ><i class="fas fa-plus"></i> &nbsp;Ajout Client</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Fin du menu actions -->
+
+
+        <!-- dédut de la vue dataTable -->
+
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Les Clients</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="dataTable_client" >
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Adresse</th>
+                            <th>Email</th>
+                            <th>Télephone</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for client in clients  %}
+                                <tr>
+                            <td>{{ client.nom }}</td>
+                            <td>{{ client.addresse }}</td>
+                            <td>{{ client.email }}</td>
+                            <td>{{ client.telephone }}</td>
+                            <td>
+                                <a href="{{ path('client_edit',{id:client.id}) }}" title="Editer" class=""><i class="fas fa-edit text-primary"></i></a>
+                                <a href="{{ path('client_delete',{id:client.id}) }}" title="Eliminer" class=""><i class="fas fa-trash text-danger"></i></a>
+                            </td>
+                        </tr>
+                            {% endfor %}
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- fin du data table -->
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+
+{% endblock %}

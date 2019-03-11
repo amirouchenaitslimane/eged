@@ -2,10 +2,11 @@ tbbord :
     path: /
     controller: App\Controller\TbBordController::index
 
-#securité
+
 cra:
     path: /cra
     controller: App\Controller\CraController::index
+#frais
 frais :
     path: /frais
     controller: App\Controller\FraisController::index
@@ -28,19 +29,34 @@ frais_duplique:
     requirements:
         id: '\d+'
 
+#Clients
+client:
+    path: /client
+    controller: App\Controller\ClientController::index
 
-
-
-
-
-
+client_new:
+    path: /client/new
+    controller: App\Controller\ClientController::new
+client_edit:
+    path: /client/edit/{id}
+    controller: App\Controller\ClientController::edit
+    requirements:
+        id: '\d+'
+client_delete:
+    path: /client/delete/{id}
+    controller: App\Controller\ClientController::delete
+    requirements:
+        id: '\d+'
+#Facturation
 facturation :
     path: /facturation
     controller: App\Controller\FacturationController::index
 
+
 ged :
     path: /ged
     controller: App\Controller\GedController::index
+#Utilisateurs
 user:
     path: /user
     controller: App\Controller\UserController::index

@@ -51,6 +51,8 @@ let option_calendar = {
 };
  $('#frais').DataTable(option_tables);
 $('#User_table').DataTable(option_tables);
+$('#dataTable_client').DataTable(option_tables);
+
 $(document).ready(()=>{
 function valid(){
     console.log('clicked');
