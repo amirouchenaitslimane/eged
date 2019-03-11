@@ -47,6 +47,16 @@ client_delete:
     controller: App\Controller\ClientController::delete
     requirements:
         id: '\d+'
+
+#societe
+societe:
+    path: /societe
+    controller: App\Controller\SocieteController::index
+societe_edit:
+    path: /societe/edit/{id}
+    controller: App\Controller\SocieteController::edit
+    requirements:
+        id: '\d+'
 #Facturation
 facturation :
     path: /facturation

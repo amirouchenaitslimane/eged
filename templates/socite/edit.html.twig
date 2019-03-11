@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
-{% block title %}Client edition{% endblock %}
+{% block title %}Societe edition{% endblock %}
 {% block body %}
     <div class="container-fluid">
     <div class="card mb-3">
@@ -8,7 +8,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="float-left">Edition de client</h3>
+                <h3 class="float-left">Edition de la societe</h3>
             </div>
         </div>
     </div>
@@ -16,5 +16,7 @@
         {{ form_start(form) }}
         {{ form_end(form) }}
     </div>
-
+    <div class="card-footer">
+        <a href="{{ path('societe') }}" class="btn btn-success"> << Retour a la table societe</a>
+    </div>
 {% endblock %}
