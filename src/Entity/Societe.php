@@ -23,12 +23,12 @@ class Societe
    */
     private $nom;
   /**
-   * @ORM\Column(type="integer",nullable=false)
+   * @ORM\Column(type="string",nullable=false)
    * @Assert\NotBlank(message="Le numero de siret est obligatoire!")
    */
     private $numero_siret;
   /**
-   * @ORM\Column(type="float",nullable=false)
+   * @ORM\Column(type="string",nullable=false)
    * @Assert\NotBlank(message="La Tva est obligatoire!")
    */
     private $tva_intercomunaitaire ;
@@ -60,29 +60,7 @@ class Societe
         return $this;
     }
 
-    public function getNumeroSiret(): ?int
-    {
-        return $this->numero_siret;
-    }
 
-    public function setNumeroSiret(int $numero_siret): self
-    {
-        $this->numero_siret = $numero_siret;
-
-        return $this;
-    }
-
-    public function getTvaIntercomunaitaire(): ?float
-    {
-        return $this->tva_intercomunaitaire;
-    }
-
-    public function setTvaIntercomunaitaire(float $tva_intercomunaitaire): self
-    {
-        $this->tva_intercomunaitaire = $tva_intercomunaitaire;
-
-        return $this;
-    }
 
     public function getTelephone(): ?string
     {
@@ -104,6 +82,30 @@ class Societe
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getNumeroSiret(): ?string
+    {
+        return $this->numero_siret;
+    }
+
+    public function setNumeroSiret(string $numero_siret): self
+    {
+        $this->numero_siret = $numero_siret;
+
+        return $this;
+    }
+
+    public function getTvaIntercomunaitaire(): ?string
+    {
+        return $this->tva_intercomunaitaire;
+    }
+
+    public function setTvaIntercomunaitaire(string $tva_intercomunaitaire): self
+    {
+        $this->tva_intercomunaitaire = $tva_intercomunaitaire;
 
         return $this;
     }
