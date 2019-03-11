@@ -37,11 +37,11 @@ class Frais
    *     type="float",
    *     message="La valeur introduite v'est pas valide."
    * )
-   * @ORM\Column(type="decimal")
+   * @ORM\Column(type="float")
    */
     private $montant_ttc;
   /**
-   * @ORM\Column(type="decimal")
+   * @ORM\Column(type="float")
    */
     private $montant_ht;
   /**
@@ -63,7 +63,7 @@ class Frais
    *     type="float",
    *     message="la valeur introduite doit etre flottante."
    * )
-   * @ORM\Column(type="decimal")
+   * @ORM\Column(type="float")
    */
     private $taxe;
   /**
@@ -123,32 +123,6 @@ class Frais
         return $this;
     }
 
-    public function getMontantTtc()
-    {
-        return $this->montant_ttc;
-    }
-
-    public function setMontantTtc($montant_ttc): self
-    {
-        $this->montant_ttc = $montant_ttc;
-
-        return $this;
-    }
-
-    public function getMontantHt()
-    {
-        return $this->montant_ht;
-    }
-
-    public function setMontantHt($montant_ht): self
-    {
-        $this->montant_ht = $montant_ht;
-
-        return $this;
-    }
-
-
-
 
 
     public function getEtat(): ?string
@@ -163,17 +137,7 @@ class Frais
         return $this;
     }
 
-    public function getTaxe()
-    {
-        return $this->taxe;
-    }
 
-    public function setTaxe($taxe): self
-    {
-        $this->taxe = $taxe;
-
-        return $this;
-    }
 
   public function setFichier(File $fichier = null)
   {
@@ -212,6 +176,42 @@ class Frais
   public function setUpdatedAt(\DateTimeInterface $updatedAt): self
   {
       $this->updatedAt = $updatedAt;
+
+      return $this;
+  }
+
+  public function getMontantTtc(): ?float
+  {
+      return $this->montant_ttc;
+  }
+
+  public function setMontantTtc(float $montant_ttc): self
+  {
+      $this->montant_ttc = $montant_ttc;
+
+      return $this;
+  }
+
+  public function getMontantHt(): ?float
+  {
+      return $this->montant_ht;
+  }
+
+  public function setMontantHt(float $montant_ht): self
+  {
+      $this->montant_ht = $montant_ht;
+
+      return $this;
+  }
+
+  public function getTaxe(): ?float
+  {
+      return $this->taxe;
+  }
+
+  public function setTaxe(float $taxe): self
+  {
+      $this->taxe = $taxe;
 
       return $this;
   }
