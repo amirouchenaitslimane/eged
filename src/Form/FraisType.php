@@ -33,6 +33,9 @@ class FraisType extends AbstractType
               'Cadeau client'=>'cadeau_client'
             ],
           ])
+          ->add('etat',ChoiceType::class,[
+            'choices'=>$this->getEtat(),
+          ])
             ->add('montant_ttc',NumberType::class)
             ->add('montant_ht',NumberType::class)
             ->add('fichier',FileType::class,[
@@ -55,4 +58,18 @@ class FraisType extends AbstractType
 
         ]);
     }
+
+  /**
+   * On inverse la valeur et la clef
+   * @return array etats
+   */
+  private function getEtat()
+  {
+    $etats = Frais::ETAT;
+    $sortie = [];//on inverse le tableau ETAT;
+    foreach ($etats as $key => $etat) {
+      $sortie[$etat] = $key;
+    }
+    return $sortie;
+  }
 }

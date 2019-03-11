@@ -47,10 +47,12 @@ class AppExtension extends AbstractExtension
   public function badgeFilter($etat)
   {
     $t = "";
-    if($etat == 'Brouillon'){
+    if($etat == 'brouillon'){
       $t .= "badge-danger";
-    }elseif ($etat == 'Envoyee'){
+    }elseif ($etat == 'envoyee'){
       $t .= "badge-success";
+    }elseif ($etat == 'validee'){
+      $t .= "badge-info";
     }
 
     return "<span class='badge ".$t." p-2'>".$etat."</span>";

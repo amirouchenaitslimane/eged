@@ -77,6 +77,13 @@ class Frais
    */
   private $updatedAt;
 
+  const ETAT = [
+      'brouillon' =>  'Brouillon',
+      'validee'   =>  'Validée',
+      'envoyee'   =>  'Envoyée'
+    ];
+
+
     public function __construct()
     {
       $this->etat = "Brouillon";
