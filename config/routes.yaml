@@ -1,14 +1,8 @@
-index:
+tbbord :
     path: /
-    controller: App\Controller\ExampleController::index
-
-
+    controller: App\Controller\TbBordController::index
 
 #securité
-
-
-
-
 cra:
     path: /cra
     controller: App\Controller\CraController::index
@@ -43,9 +37,7 @@ frais_duplique:
 facturation :
     path: /facturation
     controller: App\Controller\FacturationController::index
-tbbord :
-    path: /tbbord
-    controller: App\Controller\TbBordController::index
+
 ged :
     path: /ged
     controller: App\Controller\GedController::index
