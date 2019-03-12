@@ -57,6 +57,24 @@ societe_edit:
     controller: App\Controller\SocieteController::edit
     requirements:
         id: '\d+'
+#Document
+document:
+    path: /document
+    controller: App\Controller\DocumentController::index
+document_new:
+    path: /document/new
+    controller: App\Controller\DocumentController::new
+document_edit:
+    path: /document/edit/{id}
+    controller: App\Controller\DocumentController::edit
+    requirements:
+        id: '\d+'
+
+document_delete:
+    path: /document/delete/{id}
+    controller: App\Controller\DocumentController::delete
+    requirements:
+        id: '\d+'
 #Facturation
 facturation :
     path: /facturation

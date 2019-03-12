@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     ged_directory: '%kernel.project_dir%/public/GED'
+
     #ged_directory: '%kernel.project_dir%/public/GED'
 
 services:
@@ -36,6 +37,9 @@ services:
 #            - { name: doctrine.event_listener, event: preUpdate }
 #Enregistrer le services folder
     App\Service\DirectoryNamer:
+        arguments: ['%ged_directory%']
+        public: true
+    App\Service\DocumentNamer:
         arguments: ['%ged_directory%']
         public: true
 

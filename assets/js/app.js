@@ -52,6 +52,8 @@ let option_calendar = {
  $('#frais').DataTable(option_tables);
 $('#User_table').DataTable(option_tables);
 $('#dataTable_client').DataTable(option_tables);
+$('#dataTable_document').DataTable(option_tables);
+
 
 $(document).ready(()=>{
 function valid(){
@@ -84,13 +86,30 @@ $('#filter').datepicker({
 
 
 });
+    $('#filter_document').datepicker({
+        language:'fr',
+        format: "yyyy",
+        viewMode: "years",
+        minViewMode: "years"
 
+    });
 $("#recipient-name").change(function (e) {
-    console.log($("#recipient-namegit ").val());
+    //console.log($("#recipient-namegit ").val());
 })
 });
 
 
+$("#document_file").change(function () {
+
+    var ext = getFileExtension(this.files[0].name);
+
+    if(ext.toUpperCase() === 'PDF'){
+        readURL(this,"#reader_2");
+    }else{
+        $("#reader_2").html("<h3>l'appication ne support pas les fichiers (. "+ ext +") </h3>");
+    }
+
+});
 $("#frais_fichier").change(function () {
 
     var ext = getFileExtension(this.files[0].name);
@@ -103,8 +122,8 @@ $("#frais_fichier").change(function () {
 
 });
 
-function readURL(input) {
-    $("#reder").html('');//nettoyer le div qui recois le PDF
+function readURL(input,id="#reder") {
+    $(id).html('');//nettoyer le div qui recois le PDF
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function(e) {
@@ -112,7 +131,7 @@ function readURL(input) {
             var data = `<object data="${e.target.result}" type="application/pdf" width="100%" height="440px">
                
             </object>`
-            $("#reder").append(data);
+            $(id).append(data);
         };
         var x = reader.readAsDataURL(input.files[0]);
 

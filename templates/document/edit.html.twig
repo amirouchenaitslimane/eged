@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
-{% block title %}Client ajout{% endblock %}
+{% block title %}Document{% endblock %}
 {% block body %}
     <div class="container-fluid">
     <div class="card mb-3">
@@ -8,11 +8,9 @@
     <div class="card-header">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="float-left">Ajout de client</h3>
+                <h3 class="float-left">Edition de document</h3>
             </div>
         </div>
     </div>
-    <div class="card-body">
-
-    </div>
+    {% include 'document/form_document.html.twig' %}
 {% endblock %}

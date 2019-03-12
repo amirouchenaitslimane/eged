@@ -1,0 +1,78 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Documents{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Menu action -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-group float-right" >
+                    <button type="button" class="btn btn-secondary">Action</button>
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item " href="{{ path('document_new') }}"  ><i class="fas fa-plus"></i> Ajouter un document </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Fin du menu actions -->
+        <!-- dédut de la vue dataTable -->
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Filtrer par date</div>
+            <div class="card-body">
+                <form class="form-inline" method="post" action="{{ path('document') }}">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label mr-4">Date <small> (*)</small> : </label>
+                        <div class='input-group date form-group' id='filter_document'>
+                            <input type='text' class="form-control" id="recipient-name" name="date" value="{{ start |date('Y') }}">
+                            <span class="input-group-addon icon">
+                           <span class="fas fa-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary ml-4" value="Filter">
+                    </div>
+                    <div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Les documents</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="dataTable_document" >
+                        <thead>
+                        <tr>
+                            <th>Intitulé </th>
+                            <th>Type document</th>
+                            <th>Fichier</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for document in documents  %}
+                            <tr>
+                                <td>{{ document.intitule }}</td>
+                                <td>{{ document.type }}</td>
+                               <td><a target="_blank" href="{{ vich_uploader_asset(document, 'file') }}"><i class="far fa-file-pdf"></i></a></td>
+                                <td>
+                                    <a href="{{ path('document_edit',{id: document.id}) }}" title="Editer"><i class="fas fa-edit text-primary"></i></a>
+                                    <a onclick="return confirm('Voulez-vous eliminer le document ? ')" href="{{ path('document_delete',{id: document.id}) }}" title="Eliminer"><i class="fas fa-trash text-danger"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+{% endblock %}
