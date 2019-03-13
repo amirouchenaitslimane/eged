@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Facturation{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+        <!-- Breadcrumbs-->
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Tableau de bord </a>
+            </li>
+            <li class="breadcrumb-item active">
+                Facturation
+            </li>
+        </ol>
+        <!-- Page Content -->
+
+        {% include 'facturation/facturation_form.html.twig' %}
+    </div>
+{% endblock %}

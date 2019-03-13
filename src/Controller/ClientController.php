@@ -31,6 +31,7 @@ class ClientController extends AbstractController
   public function index()
     {
       $clients = $this->clientRepository->findAll();
+
         return $this->render('client/index.html.twig', [
            'clients'=>$clients
         ]);
@@ -63,8 +64,10 @@ class ClientController extends AbstractController
       $this->addFlash('success','Le client a été actualisé avec succès !');
       return $this->redirectToRoute('client');
     }
+
     return $this->render('client/edit.html.twig',[
-      'form'=>$form->createView()
+      'form'=>$form->createView(),
+      'client'=>$client
     ]);
     
   }

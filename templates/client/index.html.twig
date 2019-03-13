@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Clients{% endblock %}
 {% block body %}
+
     <div class="container-fluid">
         <!-- Menu action -->
 
@@ -43,6 +44,7 @@
                         <tbody>
 
                             {% for client in clients  %}
+
                                 <tr>
                             <td>{{ client.nom }}</td>
                             <td>{{ client.addresse }}</td>

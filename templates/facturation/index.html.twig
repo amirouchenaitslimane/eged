@@ -12,8 +12,43 @@
             </li>
         </ol>
         <!-- Page Content -->
-        <h1>Blank Page</h1>
-        <hr>
-        <p>This is a great starting point for new custom pages.</p>
+        <div class="card mb-3">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                Les frais</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="dataTable" >
+                        <thead>
+                        <tr>
+                            <th>Nom client</th>
+                            <th>Etat</th>
+                            <th>Total Ht</th>
+                            <th>Total Tva</th>
+                            <th>Total Ttc</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for facture in factures  %}
+                            <tr>
+                                <td>{{ facture.client.nom }}</td>
+                                <td>{{ facture.etat }}</td>
+                                <td>{{ facture.totalHt }}</td>
+                                <td>{{ facture.totalTva }}</td>
+                                <td>{{ facture.totalTtc }}</td>
+                                <td>
+                                    <a href="{{  path('facturation_pdf',{ id: facture.id }) }}" class="" title="Telecharger la facture"><i class="fas fa-download text-success" ></i></a>
+                                    <a href="{{ path('facturation_edit',{ id: facture.id }) }}" title="Editer"><i class="fas fa-edit text-primary  "></i></a>
+                                    <a href="{{ path('facturation_delete',{ id: facture.id }) }}" title="Eliminer" onclick="return confirm('Etes-vous sur de vouloir supprimer cette facture ? ')"><i class="fas fa-trash text-danger"></i></a>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+    </div>
     </div>
 {% endblock %}

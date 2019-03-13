@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,6 +45,20 @@ class Client
    */
     private $telephone;
 
+  /**
+   * One product has many features. This is the inverse side.
+   * @ORM\OneToMany(targetEntity="Facture", mappedBy="client")
+   */
+    private $factures;
+public function __construct()
+{
+  $this->factures = new ArrayCollection();
+}
+
+  public function __toString()
+  {
+    return $this->nom;
+  }
 
     public function getId(): ?int
     {
@@ -93,6 +109,37 @@ class Client
     public function setTelephone(?string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Facture[]
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Facture $facture): self
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures[] = $facture;
+            $facture->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): self
+    {
+        if ($this->factures->contains($facture)) {
+            $this->factures->removeElement($facture);
+            // set the owning side to null (unless already changed)
+            if ($facture->getClient() === $this) {
+                $facture->setClient(null);
+            }
+        }
 
         return $this;
     }

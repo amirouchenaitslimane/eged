@@ -49,6 +49,7 @@ let option_calendar = {
     format: 'dd/mm/yyyy',
 
 };
+require('./datpickers');
  $('#frais').DataTable(option_tables);
 $('#User_table').DataTable(option_tables);
 $('#dataTable_client').DataTable(option_tables);
@@ -56,10 +57,8 @@ $('#dataTable_document').DataTable(option_tables);
 
 
 $(document).ready(()=>{
-function valid(){
-    console.log('clicked');
-}
 
+    getResultFacture();
     //console.log('hola depuis le encore');
     $("#sidebarToggle").on('click', function(e) {
         e.preventDefault();
@@ -70,29 +69,7 @@ function valid(){
     $('#dataTable').DataTable(option_tables);
 
 
-    $('#datetimepicker1').datepicker({
-    language:'fr',
-    format: 'dd-mm-yyyy',
-    autoclose: true,
-    });
-    $('#datetimepicker2').datepicker({
-        language:'fr',
-        format: 'mm-yyyy',
 
-    });
-$('#filter').datepicker({
-    language:'fr',
-    format: 'mm-yyyy',
-
-
-});
-    $('#filter_document').datepicker({
-        language:'fr',
-        format: "yyyy",
-        viewMode: "years",
-        minViewMode: "years"
-
-    });
 $("#recipient-name").change(function (e) {
     //console.log($("#recipient-namegit ").val());
 })
@@ -163,3 +140,33 @@ $(document).on('click', 'a.scroll-to-top', function(event) {
     event.preventDefault();
 });
 
+
+
+
+function getResultFacture(){
+    var p = $("#facture_prix_unitaire");
+    var result = $("#result");
+    p.change(function () {
+        result.html(' ');
+        var p_unit = p.val();
+        var quant = $("#facture_quantite").val();
+        var total_ht = (parseFloat(quant) * parseFloat(p_unit));
+        var totalTva =( ( total_ht * 20 ) / 100 );
+        var totalTtc = total_ht + totalTva;
+        result.append(elementInput('Total hors taxe',total_ht.toFixed(3)));
+        result.append(elementInput('Total Tva',totalTva.toFixed(3)));
+        result.append(elementInput('Total TTC',totalTtc.toFixed(3)));
+
+
+    }) ;
+}
+
+function elementInput(label,value){
+    return `<div class="col-md-12">
+            <div class="form-group">
+            <label for="" >${label}</label>
+            <input type="text" disabled value="${value} €" class="form-control">
+            </div>
+            </div>`;
+
+}

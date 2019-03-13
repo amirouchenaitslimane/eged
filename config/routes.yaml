@@ -79,7 +79,24 @@ document_delete:
 facturation :
     path: /facturation
     controller: App\Controller\FacturationController::index
-
+facturation_new :
+    path: /facturation/new
+    controller: App\Controller\FacturationController::new
+facturation_edit:
+    path: /facturation/edit/{id}
+    controller: App\Controller\FacturationController::edit
+    requirements:
+        id: '\d+'
+facturation_delete:
+    path: /facturation/delete/{id}
+    controller: App\Controller\FacturationController::delete
+    requirements:
+        id: '\d+'
+facturation_pdf:
+    path: /facturation/pdf/{id}
+    controller: App\Controller\FacturationController::generate
+    requirements:
+        id: '\d+'
 
 ged :
     path: /ged
