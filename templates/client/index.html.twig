@@ -1,10 +1,8 @@
 {% extends 'layout.html.twig' %}
 {% block title %}Clients{% endblock %}
 {% block body %}
-
     <div class="container-fluid">
         <!-- Menu action -->
-
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group float-right" >
@@ -20,11 +18,7 @@
         </div>
         <hr>
         <!-- Fin du menu actions -->
-
-
         <!-- dédut de la vue dataTable -->
-
-
         <div class="card mb-3">
             <div class="card-header">
                 <i class="fas fa-table"></i>
@@ -37,7 +31,7 @@
                             <th>Nom</th>
                             <th>Adresse</th>
                             <th>Email</th>
-                            <th>Télephone</th>
+                            <th>Téléphone</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -56,18 +50,12 @@
                             </td>
                         </tr>
                             {% endfor %}
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
         <!-- fin du data table -->
-
-
     </div>
     <!-- /.container-fluid -->
-
-
 {% endblock %}

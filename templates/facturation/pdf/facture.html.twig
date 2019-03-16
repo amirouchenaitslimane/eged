@@ -1,0 +1,157 @@
+<style>
+
+.header {
+    border-bottom: 1px solid ;
+    margin-bottom: 40px;
+}
+.header #company div{
+    color: #555555;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+.content tr td #client{
+    padding-left: 6px;
+    border-left: 6px solid #0087C3;
+    float: left;
+}
+#client div,#client.name{
+    margin-top: 10px;
+}
+
+    #client .to{
+        color: #777777;
+    }
+    #client .name{
+        font-size: 17px;
+        font-weight: normal;
+        margin: 0;
+    }
+
+
+.content tr td #invoice{
+    padding-left: 6px;
+    border-left: 6px solid #0087C3;
+    float: right;
+}
+.border{
+    width: 100%;
+}
+table.border td{
+    border-bottom:1px solid #CFD1D2;
+    padding: 3mm 3mm;
+}
+    table.border th{
+        background: #0087C3;
+        color: #ffffff;
+        padding: 3mm 3mm;
+        font-weight: normal;
+    }
+
+table.border tfoot td{
+   margin-top: 20px;
+}
+.fack_td{
+    border: none;
+}
+    #thanks{
+        margin-top: 40px;
+    }
+</style>
+
+<page backtop="7mm" backbottom="7mm" backleft="5mm" backright="5mm">
+    <table class="header" style="width: 100%;padding-bottom: 30px ;">
+       <tr>
+           <td style="width: 70%">
+                   <div id="logo">
+                       <span> <h2>logo</h2></span>
+                   </div>
+               </td>
+              <td style="width: 30%">
+                  <div id="company">
+                      <h2 class="name">{{ societe.nom }}</h2>
+                      <div>{{ societe.numeroSiret}}</div>
+                      <div>{{ societe.telephone }}</div>
+                      <div><a href="mailto:company@example.com">{{ societe.email }}</a></div>
+                  </div>
+              </td>
+
+
+       </tr>
+    </table>
+    <table class="content" style="width: 100%;padding-bottom: 30px ;">
+        <tr>
+            <td style="width: 70%">
+                <div id="client">
+                    <div class="to">Facture pour: </div>
+                    <h2 class="name">{{ facture.client.nom }}</h2>
+                    <div class="address">{{ facture.client.addresse}}</div>
+                    <div class="email"><a href="mailto:{{ facture.client.email }}">{{ facture.client.email }}</a></div>
+                </div>
+            </td>
+            <td style="width: 30%">
+                <div id="invoice">
+                    <h1>Facture nº {{ facture.id }}</h1>
+                    <div class="date">Date de debut: {{ facture.dateDebut| date('d/m/Y') }}</div>
+                    <div class="date">Date de fin: {{ facture.dateFin| date('d/m/Y') }}</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <table class="border">
+        <thead>
+        <tr>
+            <th style="width: 70%">description</th>
+            <th style="width: 15%">Quantité</th>
+            <th style="width: 15%">Prix Unitaire</th>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ facture.designation }}</td>
+            <td>{{ facture.quantite }}</td>
+            <td>{{ facture.prixUnitaire }} €</td>
+
+        </tr>
+<tr>
+   <td class="fack_td">
+       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+   </td>
+</tr>
+
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <td ></td>
+            <td>Total Ht</td>
+            <td>{{ facture.totalHt }} €</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td>Total Tva</td>
+            <td>{{ facture.totalTva }} €</td>
+        </tr>
+        <tr>
+            <td ></td>
+            <td>Total Ttc</td>
+            <td>{{ facture.totalTtc }} €</td>
+        </tr>
+        </tfoot>
+    </table>
+    <div>
+
+        <div id="thanks">Thank you!</div>
+        <div id="notices">
+            <div>NOTICE:</div>
+            <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+        </div>
+    </div>
+
+</page>
+<page_footer>
+    Invoice was created on a computer and is valid without the signature and seal.
+</page_footer>

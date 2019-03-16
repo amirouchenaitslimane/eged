@@ -1,4 +1,4 @@
-tbbord :
+tbbord:
     path: /
     controller: App\Controller\TbBordController::index
 

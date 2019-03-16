@@ -47,4 +47,12 @@ class FactureRepository extends ServiceEntityRepository
         ;
     }
     */
+
+  public function findByDate($start, $end='2019-02-28'){
+    $entityManager = $this->getEntityManager();
+    $q = $entityManager->createQuery('
+    SELECT f FROM App\Entity\Facture f WHERE f.date BETWEEN :start and :end 
+    ')->setParameter('start',$start)->setParameter('end',$end);
+    return $q->execute();
+  }
 }

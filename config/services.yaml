@@ -42,7 +42,8 @@ services:
     App\Service\DocumentNamer:
         arguments: ['%ged_directory%']
         public: true
-
+    App\Service\FactureToPdf:
+        public: true
 #les Services de twig ici
     App\Twig\AppExtension:
         tags: ['twig.extension','twig.function']

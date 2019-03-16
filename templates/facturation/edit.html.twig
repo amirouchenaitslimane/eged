@@ -2,17 +2,12 @@
 {% block title %}Facturation{% endblock %}
 {% block body %}
     <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a href="index.html">Tableau de bord </a>
-            </li>
-            <li class="breadcrumb-item active">
-                Facturation
-            </li>
-        </ol>
-        <!-- Page Content -->
 
-        {% include 'facturation/facturation_form.html.twig' %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3 class="card-title ml-3">Editer une facture</h3>
+            </div>
+            {% include 'facturation/facturation_form.html.twig' %}
+        </div>
     </div>
 {% endblock %}

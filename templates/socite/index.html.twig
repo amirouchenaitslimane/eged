@@ -2,29 +2,13 @@
 {% block title %}Societe{% endblock %}
 {% block body %}
     <div class="container-fluid">
-        <!-- Menu action -->
-
-        {#<div class="row">#}
-            {#<div class="col-md-12">#}
-                {#<div class="btn-group float-right" >#}
-                    {#<button type="button" class="btn btn-secondary">Action</button>#}
-                    {#<button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-                        {#<span class="sr-only">Toggle Dropdown</span>#}
-                    {#</button>#}
-                    {#<div class="dropdown-menu">#}
-                        {#<a class="dropdown-item " href="{{ path('client_new') }}"  ><i class="fas fa-plus"></i> &nbsp;Ajout Client</a>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-        {#<hr>#}
-        <!-- Fin du menu actions -->
-
-
-        <!-- dédut de la vue dataTable -->
-
-
-        <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-12">
+        <a href="{{ path('societe_edit',{id:societe.id}) }}" class="btn btn-secondary float-right">Actualiser la societé</a>
+            </div>
+        </div>
+        <hr>
+                <div class="card mb-3">
             <div class="card-header">
                 <i class="fas fa-table"></i>
                Info Sociéte</div>
@@ -52,9 +36,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="card-footer">
-                <a href="{{ path('societe_edit',{id:societe.id}) }}" class="btn btn-primary">Actualisé</a>
-            </div>
+
         </div>
         <!-- fin du data table -->
 

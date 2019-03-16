@@ -1,7 +1,7 @@
 
 <div class="card-body">
     {{ form_start(form) }}
-    <div class="col-sm-12">
+    <div class="col-sm-8">
         {{ form_label(form.date, 'Date *', {'label_attr': {'id': 'recipient-name'}}) }}
 
         <div class='input-group date' id='datetimepicker_facture'>
@@ -9,7 +9,7 @@
             <span class="input-group-addon icon"><span class="fas fa-calendar"></span></span>
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="row">
             <div class="col-md-6">
                 {{ form_label(form.date, 'Date debut *', {'label_attr': {'id': 'recipient-name'}}) }}
@@ -29,28 +29,66 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
         {{ form_row(form.etat) }}
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
         {{ form_row(form.designation) }}
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
         {{ form_row(form.quantite) }}
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
         {{ form_row(form.prix_unitaire) }}
     </div>
-    <div class="col-md-12">
+    <div class="col-md-8">
         {{ form_row(form.client) }}
     </div>
     <div id="result">
 
     </div>
-    <div class="col-md-12">
-        {{ form_row(form.save) }}
-    </div>
+    {% if facture.date is not null %}
+       <div class="col-md-8">
+           <div class="form-group">
+               <label for="">Total Hors Taxe</label>
+               <input type="text" class="form-control" value="{{ facture.totalHt }} €" disabled>
 
+           </div>
+       </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="">TVA</label>
+                <input type="text" class="form-control" value="20 %" disabled>
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="">Total TVA</label>
+                <input type="text" class="form-control" value="{{ facture.totalTva }} €" disabled>
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="">Total TTC</label>
+                <input type="text" class="form-control" value="{{ facture.totalTtc }} €" disabled>
+
+            </div>
+        </div>
+
+    {% endif %}
+
+
+
+</div>
+<div class="card-footer">
+    <div class="col-md-8">
+        <a href="{{ path('facturation') }}" class="btn btn-success float-left"><< Retour a la liste des factures</a>
+        <div class="float-right">
+            {{ form_row(form.save) }}
+        </div>
+    </div>
 
 </div>
 {{ form_end(form) }}

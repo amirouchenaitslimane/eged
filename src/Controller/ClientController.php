@@ -30,7 +30,7 @@ class ClientController extends AbstractController
 
   public function index()
     {
-      $clients = $this->clientRepository->findAll();
+      $clients = $this->clientRepository->findBy([],['nom'=>'ASC']);
 
         return $this->render('client/index.html.twig', [
            'clients'=>$clients

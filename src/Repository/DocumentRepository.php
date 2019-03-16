@@ -57,7 +57,7 @@ class DocumentRepository extends ServiceEntityRepository
 
     $entityManager = $this->getEntityManager();
     $q = $entityManager->createQuery('
-    SELECT f FROM App\Entity\Document f WHERE f.date BETWEEN :start and :end 
+    SELECT f FROM App\Entity\Document f WHERE f.date BETWEEN :start and :end order by f.date DESC
     ')->setParameter('start',$start)->setParameter('end',$end);
     return $q->execute();
   }

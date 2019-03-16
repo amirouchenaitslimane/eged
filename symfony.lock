@@ -107,6 +107,9 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
+    "spipu/html2pdf": {
+        "version": "v5.2.1"
+    },
     "symfony/asset": {
         "version": "v4.2.3"
     },
@@ -307,6 +310,9 @@
     },
     "symfony/yaml": {
         "version": "v4.2.3"
+    },
+    "tecnickcom/tcpdf": {
+        "version": "6.2.26"
     },
     "twig/extensions": {
         "version": "1.0",

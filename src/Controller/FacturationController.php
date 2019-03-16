@@ -14,7 +14,9 @@ use App\Form\FactureType;
 
 use App\Repository\FactureRepository;
 use App\Repository\SocieteRepository;
+use App\Service\FactureToPdf;
 use Doctrine\Common\Persistence\ObjectManager;
+use Spipu\Html2Pdf\Html2Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,6 +38,12 @@ class FacturationController extends AbstractController
    */
   private $societeRepository;
 
+  /**
+   * FacturationController constructor.
+   * @param FactureRepository $factureRepository
+   * @param SocieteRepository $societeRepository
+   * @param ObjectManager $manager
+   */
   public function __construct(FactureRepository $factureRepository,SocieteRepository $societeRepository, ObjectManager $manager)
   {
 
@@ -43,18 +51,37 @@ class FacturationController extends AbstractController
     $this->factureRepository = $factureRepository;
     $this->societeRepository = $societeRepository;
   }
-  public function index():Response
+
+  /**
+   * @return Response
+   */
+  public function index(Request $request):Response
   {
-    $factures = $this->factureRepository->findAll();
+
+    if($request->request->get('date')){
+      $date = new \DateTime("01-01-".$request->request->get('date'));
+      $start = $date->format('Y-m-d');
+      $end = $date->format('Y-12-t');//dernier jour du mois choisi
+    }else{
+      $date = new \DateTime('now');//le mois courent
+      $start = $date->format('Y-01-01');
+      $end = $date->format('Y-12-t');
+    }
+    $factures = $this->factureRepository->findByDate($start,$end);
     return $this->render('facturation/index.html.twig',
       [
         'factures'=>$factures,
+        'start'=>$start
       ]
     );
 
 
   }
 
+  /**
+   * @param Request $request
+   * @return Response
+   */
   public function new(Request $request)
   {
     $facture = new Facture();
@@ -63,6 +90,9 @@ class FacturationController extends AbstractController
     if($form->isSubmitted())
     {
       $this->manager->persist($facture);$this->manager->flush();
+      $this->addFlash('success','La facture a été crée avec succès !');
+      return $this->redirectToRoute('facturation');
+
     }
     return $this->render('facturation/new.html.twig',
       [
@@ -73,6 +103,11 @@ class FacturationController extends AbstractController
 
   }
 
+  /**
+   * @param Request $request
+   * @param $id
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+   */
   public function edit(Request $request, $id)
   {
     $facture = $this->factureRepository->find($id);
@@ -93,6 +128,11 @@ class FacturationController extends AbstractController
     ]);
   }
 
+  /**
+   * @param Request $request
+   * @param $id
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
+   */
   public function delete(Request $request ,$id)
   {
     $facture = $this->factureRepository->find($id);
@@ -101,14 +141,24 @@ class FacturationController extends AbstractController
     return $this->redirectToRoute('facturation');
   }
 
-  public function generate(Request $request,$id)
+  /**
+   * @param Request $request
+   * @param FactureToPdf $pdf //le service des PDFs
+   * @param $id
+   * @throws \Spipu\Html2Pdf\Exception\Html2PdfException
+   */
+  public function generate(Request $request,FactureToPdf $pdf, $id)
   {
     $facture = $this->factureRepository->find($id);
     $societe = $this->societeRepository->find(1);
-
-    return $this->render('facturation/facture.html.twig',[
+//    return $this->render('facturation/pdf/facture.html.twig',[
+//      'facture'=>$facture,
+//   'societe'=>$societe
+//    ]);
+    $html =  $this->renderView('facturation/pdf/facture.html.twig',[
       'facture'=>$facture,
       'societe'=>$societe
     ]);
+      $pdf->generatePDF($html,$facture->getClient()->getNom());
   }
 }

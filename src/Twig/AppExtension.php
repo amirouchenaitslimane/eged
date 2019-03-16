@@ -9,6 +9,7 @@
 namespace App\Twig;
 
 
+use App\Entity\Facture;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -38,8 +39,12 @@ class AppExtension extends AbstractExtension
       new TwigFunction('totalTtc',[$this,'TotalTtc'], ['is_safe'=>['html']]),
       new TwigFunction('totalHt',[$this,'TotalHt'], ['is_safe'=>['html']]),
       new TwigFunction('totalTaxe',[$this,'totalTaxe'], ['is_safe'=>['html']]),
-     new TwigFunction('format_etat_user',[$this,'formatEtatUser'], ['is_safe'=>['html']])
+     new TwigFunction('format_etat_user',[$this,'formatEtatUser'], ['is_safe'=>['html']]),
+      new TwigFunction('factureTtc',[$this,'factureTotalTtc'], ['is_safe'=>['html']]),
+      new TwigFunction('factureHt',[$this,'factureHt'], ['is_safe'=>['html']]),
+      new TwigFunction('factureTva',[$this,'factureTva'], ['is_safe'=>['html']])
 
+//
     ];
   }
   
@@ -113,5 +118,38 @@ class AppExtension extends AbstractExtension
       $str .= "Actif";
     }
     return $str;
+  }
+
+  /**
+   * @param array[] $factures
+   */
+public function factureTotalTtc($factures){
+  $ttc = 0;
+
+  foreach ($factures as $facture) {
+    $ttc += $facture->getTotalTtc();
+  }
+  return $ttc;
+}
+
+  public function factureHt($factures)
+  {
+    $ht = 0;
+
+    foreach ($factures as $facture) {
+      $ht += $facture->getTotalHt();
+    }
+    return $ht;
+
+  }
+
+  public function factureTva($factures)
+  {
+    $total_tva = 0;
+
+    foreach ($factures as $facture) {
+      $total_tva += $facture->getTotalTva();
+    }
+    return $total_tva;
   }
 }

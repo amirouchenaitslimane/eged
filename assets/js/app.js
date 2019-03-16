@@ -98,7 +98,17 @@ $("#frais_fichier").change(function () {
     }
 
 });
+$("#frais_duplique_fichier").change(function () {
 
+    var ext = getFileExtension(this.files[0].name);
+
+    if(ext.toUpperCase() === 'PDF'){
+        readURL(this);
+    }else{
+        $("#reder").html("<h3>l'appication ne support pas les fichiers (. "+ ext +") </h3>");
+    }
+
+});
 function readURL(input,id="#reder") {
     $(id).html('');//nettoyer le div qui recois le PDF
     if (input.files && input.files[0]) {
@@ -147,25 +157,30 @@ function getResultFacture(){
     var p = $("#facture_prix_unitaire");
     var result = $("#result");
     p.change(function () {
-        result.html(' ');
-        var p_unit = p.val();
-        var quant = $("#facture_quantite").val();
-        var total_ht = (parseFloat(quant) * parseFloat(p_unit));
-        var totalTva =( ( total_ht * 20 ) / 100 );
-        var totalTtc = total_ht + totalTva;
-        result.append(elementInput('Total hors taxe',total_ht.toFixed(3)));
-        result.append(elementInput('Total Tva',totalTva.toFixed(3)));
-        result.append(elementInput('Total TTC',totalTtc.toFixed(3)));
+
+        if(p.val() !== ""){
+            var p_unit = p.val();
+            var quant = $("#facture_quantite").val();
+            var total_ht = (parseFloat(quant) * parseFloat(p_unit));
+            var totalTva =( ( total_ht * 20 ) / 100 );
+            var totalTtc = total_ht + totalTva;
+            result.append(elementInput('Total hors taxe',total_ht.toFixed(3)+' €'));
+            result.append(elementInput('Tva','20 %'))
+            result.append(elementInput('Total Tva',totalTva.toFixed(3)+' €'));
+            result.append(elementInput('Total TTC',totalTtc.toFixed(3)+' €'));
+        }else{
+            result.html(' ');
+        }
 
 
     }) ;
 }
 
 function elementInput(label,value){
-    return `<div class="col-md-12">
+    return `<div class="col-md-8">
             <div class="form-group">
             <label for="" >${label}</label>
-            <input type="text" disabled value="${value} €" class="form-control">
+            <input type="text" disabled value="${value}" class="form-control">
             </div>
             </div>`;
 

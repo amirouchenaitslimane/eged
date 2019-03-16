@@ -23,7 +23,7 @@ class FraisRepository extends ServiceEntityRepository
 
     $entityManager = $this->getEntityManager();
     $q = $entityManager->createQuery('
-    SELECT f FROM App\Entity\Frais f WHERE f.date BETWEEN :start and :end 
+    SELECT f FROM App\Entity\Frais f WHERE f.date BETWEEN :start and :end order by f.date ASC 
     ')->setParameter('start',$start)->setParameter('end',$end);
     return $q->execute();
   }
