@@ -9,7 +9,9 @@
 namespace App\Controller;
 
 
+use App\Entity\Client;
 use App\Entity\Facture;
+use App\Form\ClientType;
 use App\Form\FactureType;
 
 use App\Repository\FactureRepository;
@@ -85,9 +87,11 @@ class FacturationController extends AbstractController
   public function new(Request $request)
   {
     $facture = new Facture();
-    $form = $this->createForm(FactureType::class,$facture);
-    $form->handleRequest($request);
-    if($form->isSubmitted())
+    $client = new Client();
+    $form = $this->createForm(ClientType::class,$client);
+    $form_facture = $this->createForm(FactureType::class,$facture);
+    $form_facture->handleRequest($request);
+    if($form_facture->isSubmitted())
     {
       $this->manager->persist($facture);$this->manager->flush();
       $this->addFlash('success','La facture a été crée avec succès !');
@@ -96,8 +100,9 @@ class FacturationController extends AbstractController
     }
     return $this->render('facturation/new.html.twig',
       [
-        'form'=>$form->createView(),
-        'facture'=>$facture
+        'form_facture'=>$form_facture->createView(),
+        'facture'=>$facture,
+        'form'=>$form->createView()
       ]
     );
 

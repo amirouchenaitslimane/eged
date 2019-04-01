@@ -1,48 +1,57 @@
 
 <div class="card-body">
-    {{ form_start(form) }}
+    {{ form_start(form_facture) }}
     <div class="col-sm-8">
-        {{ form_label(form.date, 'Date *', {'label_attr': {'id': 'recipient-name'}}) }}
+        {{ form_label(form_facture.date, 'Date *', {'label_attr': {'id': 'recipient-name'}}) }}
 
         <div class='input-group date' id='datetimepicker_facture'>
-            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form_facture.date, {'attr': {'class': 'form-control'}}) }}
             <span class="input-group-addon icon"><span class="fas fa-calendar"></span></span>
         </div>
     </div>
     <div class="col-md-8">
         <div class="row">
             <div class="col-md-6">
-                {{ form_label(form.date, 'Date debut *', {'label_attr': {'id': 'recipient-name'}}) }}
+                {{ form_label(form_facture.date, 'Date debut *', {'label_attr': {'id': 'recipient-name'}}) }}
 
                 <div class='input-group date' id='datetimepicker_debut'>
-                    {{ form_widget(form.date_debut, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form_facture.date_debut, {'attr': {'class': 'form-control'}}) }}
                     <span class="input-group-addon icon"><span class="fas fa-calendar"></span></span>
                 </div>
             </div>
             <div class="col-md-6">
-                {{ form_label(form.date, 'Date de fin *', {'label_attr': {'id': 'recipient-name'}}) }}
+                {{ form_label(form_facture.date, 'Date de fin *', {'label_attr': {'id': 'recipient-name'}}) }}
 
                 <div class='input-group date' id='datetimepicker_fin'>
-                    {{ form_widget(form.date_fin, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_widget(form_facture.date_fin, {'attr': {'class': 'form-control'}}) }}
                     <span class="input-group-addon icon"><span class="fas fa-calendar"></span></span>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-8">
-        {{ form_row(form.etat) }}
+        {{ form_row(form_facture.etat) }}
     </div>
     <div class="col-md-8">
-        {{ form_row(form.designation) }}
+        {{ form_row(form_facture.designation) }}
     </div>
     <div class="col-md-8">
-        {{ form_row(form.quantite) }}
+        {{ form_row(form_facture.quantite) }}
     </div>
     <div class="col-md-8">
-        {{ form_row(form.prix_unitaire) }}
+        {{ form_row(form_facture.prix_unitaire) }}
     </div>
     <div class="col-md-8">
-        {{ form_row(form.client) }}
+       <div class="row">
+           <div class="col-md-8">
+               {{ form_row(form_facture.client,{'attr':{'class':'select2'}}) }}
+           </div>
+           <div class="col-md-4 mt-2">
+               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                   Launch demo modal
+               </button>
+           </div>
+       </div>
     </div>
     <div id="result">
 
@@ -82,13 +91,6 @@
 
 
 </div>
-<div class="card-footer">
-    <div class="col-md-8">
-        <a href="{{ path('facturation') }}" class="btn btn-success float-left"><< Retour a la liste des factures</a>
-        <div class="float-right">
-            {{ form_row(form.save) }}
-        </div>
-    </div>
-
-</div>
-{{ form_end(form) }}
+{% include 'facturation/form_footer.html.twig' %}
+{{ form_end(form_facture) }}
+<!-- Button trigger modal -->

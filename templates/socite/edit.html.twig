@@ -14,9 +14,13 @@
     </div>
     <div class="card-body">
         {{ form_start(form) }}
-        {{ form_end(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.numero_siret) }}
+        {{ form_row(form.tva_intercomunaitaire) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.email) }}
+
     </div>
-    <div class="card-footer">
-        <a href="{{ path('societe') }}" class="btn btn-success"> << Retour a la table societe</a>
-    </div>
+    {% include 'socite/form_footer.html.twig' %}
+    {{ form_end(form) }}
 {% endblock %}
