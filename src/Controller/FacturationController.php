@@ -20,6 +20,7 @@ use App\Service\FactureToPdf;
 use Doctrine\Common\Persistence\ObjectManager;
 use Spipu\Html2Pdf\Html2Pdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -165,5 +166,44 @@ class FacturationController extends AbstractController
       'societe'=>$societe
     ]);
       $pdf->generatePDF($html,$facture->getClient()->getNom());
+  }
+
+
+  public function addClient(Request $request)
+  {
+    //This is optional. Do not do this check if you want to call the same action using a regular request.
+    if (!$request->isXmlHttpRequest()) {
+      return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
+    }
+if($request->isXmlHttpRequest()){
+  $entity = new Client();
+  $datas = $request->get("client");
+
+    $entity->setNom($datas['nom']);
+    $entity->setAddresse($datas['addresse']);
+    $entity->setEmail($datas['email']);
+    $entity->setTelephone($datas['telephone']);
+
+
+  $this->manager->persist($entity);
+  $this->manager->flush();
+  return new JsonResponse(
+    [
+    'success'=>'saved',
+    'client'=>$datas
+    ]
+  );
+}
+
+
+
+
+
+
+
+
+    $response = new JsonResponse(array('error'=>'not saved'));
+
+    return $response;
   }
 }

@@ -48,6 +48,11 @@ client_delete:
     requirements:
         id: '\d+'
 
+
+client_add_ajax:
+    path: /client/add
+    controller: App\Controller\FacturationController::addClient
+
 #societe
 societe:
     path: /societe

@@ -6,19 +6,26 @@ $('#datetimepicker1').datepicker({
 $('#datetimepicker2').datepicker({
     language:'fr',
     format: 'mm-yyyy',
+    startView: "months",
+    minViewMode: "months",
+    autoclose: true,
+
 
 });
 $('#filter').datepicker({
     language:'fr',
     format: 'mm-yyyy',
-
+    startView: "months",
+    minViewMode: "months",
+    autoclose: true,
 
 });
 $('#filter_document').datepicker({
     language:'fr',
     format: "yyyy",
     viewMode: "years",
-    minViewMode: "years"
+    minViewMode: "years",
+    autoclose: true,
 
 });
 

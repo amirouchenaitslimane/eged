@@ -51,6 +51,7 @@ let option_calendar = {
 };
 require('./datpickers');
 require('select2/dist/js/select2.min');
+require('./client_add');
  $('#frais').DataTable(option_tables);
 $('#User_table').DataTable(option_tables);
 $('#dataTable_client').DataTable(option_tables);
@@ -58,7 +59,7 @@ $('#dataTable_document').DataTable(option_tables);
 
 $(document).ready(()=>{
 
-    $(".select2").select2();
+      $("select").select2();
     getResultFacture();
     //console.log('hola depuis le encore');
     $("#sidebarToggle").on('click', function(e) {

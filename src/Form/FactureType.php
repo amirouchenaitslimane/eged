@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Client;
 use App\Entity\Facture;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -51,7 +53,12 @@ class FactureType extends AbstractType
 
 //            ->add('totalTva')
 //            ->add('totalTtc')
-            ->add('client')
+            ->add('client',EntityType::class,[
+            'class' => Client::class,
+            'choice_label' => 'nom',
+            'attr' => ['class'=>'select2 form-control']
+
+          ])
           ->add('save',SubmitType::class)
         ;
     }
