@@ -26,8 +26,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FacturationController extends AbstractController
 {
-
-
   /**
    * @var ObjectManager
    */
@@ -49,7 +47,6 @@ class FacturationController extends AbstractController
    */
   public function __construct(FactureRepository $factureRepository,SocieteRepository $societeRepository, ObjectManager $manager)
   {
-
     $this->manager = $manager;
     $this->factureRepository = $factureRepository;
     $this->societeRepository = $societeRepository;
@@ -60,7 +57,6 @@ class FacturationController extends AbstractController
    */
   public function index(Request $request):Response
   {
-
     if($request->request->get('date')){
       $date = new \DateTime("01-01-".$request->request->get('date'));
       $start = $date->format('Y-m-d');
@@ -77,8 +73,6 @@ class FacturationController extends AbstractController
         'start'=>$start
       ]
     );
-
-
   }
 
   /**
@@ -97,7 +91,6 @@ class FacturationController extends AbstractController
       $this->manager->persist($facture);$this->manager->flush();
       $this->addFlash('success','La facture a été crée avec succès !');
       return $this->redirectToRoute('facturation');
-
     }
     return $this->render('facturation/new.html.twig',
       [
@@ -106,7 +99,6 @@ class FacturationController extends AbstractController
         'form'=>$form->createView()
       ]
     );
-
   }
 
   /**
@@ -157,10 +149,6 @@ class FacturationController extends AbstractController
   {
     $facture = $this->factureRepository->find($id);
     $societe = $this->societeRepository->find(1);
-//    return $this->render('facturation/pdf/facture.html.twig',[
-//      'facture'=>$facture,
-//   'societe'=>$societe
-//    ]);
     $html =  $this->renderView('facturation/pdf/facture.html.twig',[
       'facture'=>$facture,
       'societe'=>$societe
@@ -168,31 +156,31 @@ class FacturationController extends AbstractController
       $pdf->generatePDF($html,$facture->getClient()->getNom());
   }
 
-
+  /**
+   * Ajout de client avec AJAX
+   * @param Request $request
+   * @return JsonResponse
+   */
   public function addClient(Request $request)
   {
-    //This is optional. Do not do this check if you want to call the same action using a regular request.
     if (!$request->isXmlHttpRequest()) {
       return new JsonResponse(array('message' => 'You can access this only using Ajax!'), 400);
     }
-if($request->isXmlHttpRequest()){
-  $entity = new Client();
-  $datas = $request->get("client");
-
-    $entity->setNom($datas['nom']);
-    $entity->setAddresse($datas['addresse']);
-    $entity->setEmail($datas['email']);
-    $entity->setTelephone($datas['telephone']);
-
-
-  $this->manager->persist($entity);
-  $this->manager->flush();
-  return new JsonResponse(
-    [
-    'success'=>'saved',
-    'client'=>$datas
-    ]
-  );
+    if($request->isXmlHttpRequest()){
+      $entity = new Client();
+      $datas = $request->get("client");
+      $entity->setNom($datas['nom']);
+      $entity->setAddresse($datas['addresse']);
+      $entity->setEmail($datas['email']);
+      $entity->setTelephone($datas['telephone']);
+      $this->manager->persist($entity);
+      $this->manager->flush();
+      return new JsonResponse(
+        [
+        'success'=>'saved',
+        'client'=>$datas
+        ]
+      );
 }
 
 
@@ -206,4 +194,8 @@ if($request->isXmlHttpRequest()){
 
     return $response;
   }
+
+
+
+
 }
