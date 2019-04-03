@@ -13,7 +13,6 @@ use App\Entity\Client;
 use App\Entity\Facture;
 use App\Form\ClientType;
 use App\Form\FactureType;
-
 use App\Repository\FactureRepository;
 use App\Repository\SocieteRepository;
 use App\Service\FactureToPdf;
@@ -57,7 +56,6 @@ class FacturationController extends AbstractController
    */
   public function index(Request $request):Response
   {
-
     if($request->request->get('date')){
       $date = new \DateTime("01-01-".$request->request->get('date'));
       $start = $date->format('Y-m-d');
@@ -68,11 +66,7 @@ class FacturationController extends AbstractController
       $end = $date->format('Y-12-t');
     }
     $factures = $this->factureRepository->findByDate($start,$end);
-    return $this->render('facturation/index.html.twig',
-      [
-        'factures'=>$factures,
-        'start'=>$start
-      ]
+    return $this->render('facturation/index.html.twig',['factures'=>$factures,'start'=>$start]
     );
   }
 
@@ -82,8 +76,8 @@ class FacturationController extends AbstractController
    */
   public function new(Request $request)
   {
-
     $facture = new Facture();
+    //creaction d'un nouveau client s'il n'existe pas
     $client = new Client();
     $form = $this->createForm(ClientType::class,$client);
     $form_facture = $this->createForm(FactureType::class,$facture);
@@ -94,13 +88,7 @@ class FacturationController extends AbstractController
       $this->addFlash('success','La facture a été crée avec succès !');
       return $this->redirectToRoute('facturation');
     }
-    return $this->render('facturation/new.html.twig',
-      [
-        'form_facture'=>$form_facture->createView(),
-        'facture'=>$facture,
-        'form'=>$form->createView()
-      ]
-    );
+    return $this->render('facturation/new.html.twig',['form_facture'=>$form_facture->createView(),'facture'=>$facture,'form'=>$form->createView()]);
   }
 
   /**
@@ -149,23 +137,14 @@ class FacturationController extends AbstractController
    */
   public function generate(Request $request,FactureToPdf $pdf,$id)
   {
-
-
     $facture = $this->factureRepository->find($id);
     $societe_count = $this->societeRepository->count([]);
-  if($societe_count == 0)
-  {
-
-    $this->addFlash('info','Vous devez crée le nom de la sociéte ');
-    return $this->redirectToRoute('societe_new',['facture'=>$facture->getId()]);
-  }
+    if($societe_count == 0){
+      $this->addFlash('info','Vous devez crée le nom de la sociéte ');
+      return $this->redirectToRoute('societe_new',['facture'=>$facture->getId()]);
+    }
     $societe = $this->societeRepository->findAll()[0];
-    $html =  $this->renderView('facturation/pdf/facture.html.twig',[
-      'facture'=>$facture,
-      'societe'=>$societe
-    ]);
-
-
+    $html =  $this->renderView('facturation/pdf/facture.html.twig',['facture'=>$facture,'societe'=>$societe]);
     $pdf->generatePDF($html,$facture->getClient()->getNom());
   }
 
@@ -188,11 +167,7 @@ class FacturationController extends AbstractController
       $entity->setTelephone($datas['telephone']);
       $this->manager->persist($entity);
       $this->manager->flush();
-      return new JsonResponse(
-        [
-        'success'=>'saved',
-        'client'=>$datas
-        ]
+      return new JsonResponse(['success'=>'saved','client'=>$datas]
       );
 }
 
@@ -207,8 +182,4 @@ class FacturationController extends AbstractController
 
     return $response;
   }
-
-
-
-
 }

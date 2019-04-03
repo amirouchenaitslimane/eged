@@ -52,15 +52,15 @@ class DocumentController extends AbstractController
     $form = $this->createForm(DocumentType::class,$document);
     $form->handleRequest($request);
     if($form->isSubmitted()){
-    if($form->isValid()){
-      $this->manager->persist($document);
-      $this->manager->flush();
-      $this->addFlash('success','Le documment a été ajouté avec succès !');
+      if($form->isValid()){
+        $this->manager->persist($document);
+        $this->manager->flush();
+        $this->addFlash('success','Le documment a été ajouté avec succès !');
 
-    }else{
-      $this->addFlash('danger','Le documment n\'a pas été ajouté !');
+      }else{
+        $this->addFlash('danger','Le documment n\'a pas été ajouté !');
 
-    }
+      }
       return $this->redirectToRoute('document');
     }
     return $this->render('document/new.html.twig',[
@@ -85,7 +85,6 @@ class DocumentController extends AbstractController
         $this->addFlash('danger','Le documment na pas été actualisé  !');
       }
       return $this->redirectToRoute('document');
-
     }
     return $this->render('document/edit.html.twig',[
       'form'=>$form->createView(),
@@ -101,7 +100,6 @@ class DocumentController extends AbstractController
     }
     $this->manager->remove($document);
     $this->manager->flush();
-
     $this->addFlash('success','Le documment a été eliminé avec succès !');
     return $this->redirectToRoute('document');
   }

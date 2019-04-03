@@ -29,25 +29,24 @@ class ClientController extends AbstractController
   }
 
   public function index()
-    {
-      $clients = $this->clientRepository->findBy([],['nom'=>'ASC']);
-
-        return $this->render('client/index.html.twig', [
-           'clients'=>$clients
-        ]);
+  {
+    $clients = $this->clientRepository->findBy([],['nom'=>'ASC']);
+      return $this->render('client/index.html.twig', [
+         'clients'=>$clients
+      ]);
     }
 
   public function new(Request $request)
   {
     $client = new Client();
     $form = $this->createForm(ClientType::class ,$client);
-  $form->handleRequest($request);
-  if ($form->isSubmitted() && $form->isValid()){
-    $this->manager->persist($client);
-    $this->manager->flush();
-    $this->addFlash('success','Le client a été crée avec succès !');
-    return $this->redirectToRoute('client');
-  }
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()){
+      $this->manager->persist($client);
+      $this->manager->flush();
+      $this->addFlash('success','Le client a été crée avec succès !');
+      return $this->redirectToRoute('client');
+    }
     return $this->render('client/new.html.twig',[
       'form'=>$form->createView()
     ]);
@@ -64,12 +63,10 @@ class ClientController extends AbstractController
       $this->addFlash('success','Le client a été actualisé avec succès !');
       return $this->redirectToRoute('client');
     }
-
     return $this->render('client/edit.html.twig',[
       'form'=>$form->createView(),
       'client'=>$client
     ]);
-    
   }
 
   public function delete(Request $request,$id)
@@ -79,6 +76,5 @@ class ClientController extends AbstractController
     $this->manager->flush();
     $this->addFlash('success','Le client a été eliminé avec succès !');
     return $this->redirectToRoute('client');
-
   }
 }

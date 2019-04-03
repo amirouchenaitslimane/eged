@@ -22,26 +22,17 @@ class SocieteController extends AbstractController
   private $manager;
 
   public function __construct(SocieteRepository $repository, ObjectManager $manager){
-
     $this->repository = $repository;
     $this->manager = $manager;
   }
-    public function index()
-    {
-      $societe = $this->repository->findAll();
-     if(empty($societe)){
-       return $this->redirectToRoute('societe_new');
-     }
-
-        return $this->render('socite/index.html.twig', [
-          'societe'=>$societe[0]
-        ]);
+  public function index(){
+    $societe = $this->repository->findAll();
+    if(empty($societe)){
+      return $this->redirectToRoute('societe_new');
     }
-
-
-
-  public function edit(Request $request,$id)
-  {
+    return $this->render('socite/index.html.twig', ['societe'=>$societe[0]]);
+  }
+  public function edit(Request $request,$id){
     $societe = $this->repository->find($id);
     $form = $this->createForm(SocieteType::class,$societe);
     $form->handleRequest($request);
@@ -50,12 +41,8 @@ class SocieteController extends AbstractController
       $this->manager->flush();
       $this->addFlash('success','Les donnée de la société ont  été actualisée avec succès !');
       return $this->redirectToRoute('societe');
-
     }
-    return $this->render('socite/edit.html.twig', [
-      'societe'=>$societe,
-      'form'=> $form->createView(),
-    ]);
+    return $this->render('socite/edit.html.twig', ['societe'=>$societe,'form'=> $form->createView()]);
   }
 
   public function new(Request $request)
@@ -71,10 +58,6 @@ class SocieteController extends AbstractController
         }
       return $this->redirectToRoute('societe');
     }
-    return $this->render('socite/new.html.twig', [
-      'societe'=>$societe,
-      'form'=> $form->createView(),
-    ]);
-
+    return $this->render('socite/new.html.twig', ['societe'=>$societe, 'form'=> $form->createView()]);
   }
 }

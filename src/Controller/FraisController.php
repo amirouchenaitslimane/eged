@@ -45,7 +45,6 @@ class FraisController extends AbstractController
    */
   public function index(Request $request) :Response
   {
-
     if($request->request->get('date')){
       $date = new \DateTime("01-".$request->request->get('date'));
       $start = $date->format('Y-m-d');
@@ -57,13 +56,7 @@ class FraisController extends AbstractController
     }
     //listes des notes de frais dans la base de donnee
     $frais_all = $this->fraisRepository->findByDate($start,$end);
-
-    return $this->render('frais/index.html.twig',
-      [
-        'frais'=>$frais_all,
-        'start'=>$start//le mois ou l'annee choisi | la date curent m-Y
-      ]
-    );
+    return $this->render('frais/index.html.twig',['frais'=>$frais_all,'start'=>$start]);//start=> le mois ou l'annee choisi | la date curent m-Y
   }
 
   /**
@@ -73,11 +66,9 @@ class FraisController extends AbstractController
    */
   public function new(Request $request,ValidatorInterface $validator) :Response
   {
-
     $frais = new Frais();
     $form = $this->createForm(FraisType::class,$frais);
     $form->handleRequest($request);
-
     if ($form->isSubmitted()) {
       $error = $validator->validate($frais);
       if($form->isValid()){
@@ -87,15 +78,10 @@ class FraisController extends AbstractController
       }else{
         $this->addFlash('danger','La not de frais non enregistre !');
       }
-
     }else{
       $error = null;
     }
-    return $this->render('frais/new.html.twig',
-      [
-        'form'=>$form->createView(),
-        'errors'=>$error,
-      ]);
+    return $this->render('frais/new.html.twig', ['form'=>$form->createView(),'errors'=>$error, ]);
   }
 
   /**
@@ -108,14 +94,12 @@ class FraisController extends AbstractController
   public function edit(Request $request,$id,ValidatorInterface $validator)
   {
     $frais = $this->fraisRepository->find($id);
-
     if(!$frais){
       throw $this->createNotFoundException('frais demander n\'existe pas ');
     }
     //$error = null;
     $form = $this->createForm(FraisType::class,$frais);
     $form->handleRequest($request);
-
     if ($form->isSubmitted() ) {
       $error = $validator->validate($frais);
       if($form->isValid()){
@@ -125,7 +109,6 @@ class FraisController extends AbstractController
       }else{
         $this->addFlash('danger','La note de frais na pas été actualisée  !');
       }
-
     }else{
       $error = null;
     }
@@ -163,7 +146,6 @@ class FraisController extends AbstractController
    */
   public function dupliquer(Request $request ,$id)
   {
-
     $frais = $this->fraisRepository->find($id);
     $frais_new = clone $frais;//ont cree un nouvel objet avant la submission de formulaire
     $form = $this->createForm(FraisDupliqueType::class,$frais_new);
@@ -179,6 +161,4 @@ class FraisController extends AbstractController
       'frais'=>$frais,
     ]);
   }
-
-
 }

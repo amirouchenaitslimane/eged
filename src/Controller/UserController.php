@@ -20,6 +20,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
+  //Refactoring .....
   public function index(Request $request):Response
   {
     $utilisateurs = $this->getDoctrine()->getManager()->getRepository(Utilisateur::class)->getUsers();
