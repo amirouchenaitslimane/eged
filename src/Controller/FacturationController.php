@@ -57,6 +57,7 @@ class FacturationController extends AbstractController
    */
   public function index(Request $request):Response
   {
+
     if($request->request->get('date')){
       $date = new \DateTime("01-01-".$request->request->get('date'));
       $start = $date->format('Y-m-d');
@@ -81,6 +82,7 @@ class FacturationController extends AbstractController
    */
   public function new(Request $request)
   {
+
     $facture = new Facture();
     $client = new Client();
     $form = $this->createForm(ClientType::class,$client);
@@ -145,15 +147,26 @@ class FacturationController extends AbstractController
    * @param $id
    * @throws \Spipu\Html2Pdf\Exception\Html2PdfException
    */
-  public function generate(Request $request,FactureToPdf $pdf, $id)
+  public function generate(Request $request,FactureToPdf $pdf,$id)
   {
+
+
     $facture = $this->factureRepository->find($id);
-    $societe = $this->societeRepository->find(1);
+    $societe_count = $this->societeRepository->count([]);
+  if($societe_count == 0)
+  {
+
+    $this->addFlash('info','Vous devez crée le nom de la sociéte ');
+    return $this->redirectToRoute('societe_new',['facture'=>$facture->getId()]);
+  }
+    $societe = $this->societeRepository->findAll()[0];
     $html =  $this->renderView('facturation/pdf/facture.html.twig',[
       'facture'=>$facture,
       'societe'=>$societe
     ]);
-      $pdf->generatePDF($html,$facture->getClient()->getNom());
+
+
+    $pdf->generatePDF($html,$facture->getClient()->getNom());
   }
 
   /**

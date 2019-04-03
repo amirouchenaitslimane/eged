@@ -28,13 +28,13 @@ class SocieteController extends AbstractController
   }
     public function index()
     {
-
-
-      $societe = $this->repository->find(1);
-//      dump($societe);die();
+      $societe = $this->repository->findAll();
+     if(empty($societe)){
+       return $this->redirectToRoute('societe_new');
+     }
 
         return $this->render('socite/index.html.twig', [
-          'societe'=>$societe
+          'societe'=>$societe[0]
         ]);
     }
 
@@ -56,5 +56,25 @@ class SocieteController extends AbstractController
       'societe'=>$societe,
       'form'=> $form->createView(),
     ]);
+  }
+
+  public function new(Request $request)
+  {
+    $societe = new Societe();
+    $form = $this->createForm(SocieteType::class,$societe);
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()){
+        $this->manager->persist($societe);$this->manager->flush();
+        if($request->query->get('facture')){
+          $id = (int) $request->query->get('facture');
+          return $this->redirectToRoute('facturation_pdf',['id'=>$id]);
+        }
+      return $this->redirectToRoute('societe');
+    }
+    return $this->render('socite/new.html.twig', [
+      'societe'=>$societe,
+      'form'=> $form->createView(),
+    ]);
+
   }
 }

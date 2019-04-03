@@ -57,6 +57,9 @@ client_add_ajax:
 societe:
     path: /societe
     controller: App\Controller\SocieteController::index
+societe_new:
+    path: /societe/new
+    controller: App\Controller\SocieteController::new
 societe_edit:
     path: /societe/edit/{id}
     controller: App\Controller\SocieteController::edit
@@ -84,7 +87,7 @@ document_delete:
 facturation :
     path: /facturation
     controller: App\Controller\FacturationController::index
-facturation_new :
+facturation_new:
     path: /facturation/new
     controller: App\Controller\FacturationController::new
 facturation_edit:
@@ -102,6 +105,7 @@ facturation_pdf:
     controller: App\Controller\FacturationController::generate
     requirements:
         id: '\d+'
+
 
 ged :
     path: /ged

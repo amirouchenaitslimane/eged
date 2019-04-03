@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+{% block title %}Societe edition{% endblock %}
+{% block body %}
+    <div class="container-fluid">
+    <div class="card mb-3">
+
+
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="float-left">Ajout de la societe</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        {{ form_start(form) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.numero_siret) }}
+        {{ form_row(form.tva_intercomunaitaire) }}
+        {{ form_row(form.telephone) }}
+        {{ form_row(form.email) }}
+
+    </div>
+    {% include 'socite/form_footer.html.twig' %}
+    {{ form_end(form) }}
+{% endblock %}

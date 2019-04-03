@@ -47,4 +47,20 @@ class SocieteRepository extends ServiceEntityRepository
         ;
     }
     */
+
+  public function societeCount()
+  {
+    $count =  $this->createQueryBuilder('s')
+      ->select('count(s.id)')
+      ->getQuery()
+      ->getOneOrNullResult()[1];
+
+    return (int) $count;
+  }
+
+
+  public function scount()
+  {
+    return $this->count(['id']);
+  }
 }
