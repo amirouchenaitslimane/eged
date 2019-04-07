@@ -47,3 +47,17 @@ services:
 #les Services de twig ici
     App\Twig\AppExtension:
         tags: ['twig.extension','twig.function']
+
+
+
+#    App\EventListener\BetaListener:
+#        arguments: ['@App\Beta\BetaHTMLAdder','2019-04-05']
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.response, method: processBeta }
+
+    App\Societe\SocieteCheck:
+        arguments: ["@doctrine.orm.entity_manager","@router",'@session']
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse  }
+
+
