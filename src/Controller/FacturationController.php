@@ -138,11 +138,11 @@ class FacturationController extends AbstractController
   public function generate(Request $request,FactureToPdf $pdf,$id)
   {
     $facture = $this->factureRepository->find($id);
-    $societe_count = $this->societeRepository->count([]);
-    if($societe_count == 0){
-      $this->addFlash('info','Vous devez crée le nom de la sociéte ');
-      return $this->redirectToRoute('societe_new',['facture'=>$facture->getId()]);
-    }
+//    $societe_count = $this->societeRepository->count([]);
+//    if($societe_count == 0){
+//      $this->addFlash('info','Vous devez crée le nom de la sociéte ');
+//      return $this->redirectToRoute('societe_new',['facture'=>$facture->getId()]);
+//    }
     $societe = $this->societeRepository->findAll()[0];
     $html =  $this->renderView('facturation/pdf/facture.html.twig',['facture'=>$facture,'societe'=>$societe]);
     $pdf->generatePDF($html,$facture->getClient()->getNom());

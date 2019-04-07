@@ -45,7 +45,7 @@ class SocieteCheck
       $societe = $this->em->getRepository(Societe::class)->findAll();
      if(empty($societe)){
        $url = $event->getRequest()->getPathInfo();
-        if($url === '/facturation' || $url === '/societe'){
+        if($url === '/facturation' || $url === '/facturation/new' || $url === '/societe'){
             $this->session->getFlashBag()->add('info','Vous devez cree une societe pour pouvoire accedez je sait pas quoi mettre');
           return $event->setResponse(new RedirectResponse($this->router->generate('societe_new')));
         }
