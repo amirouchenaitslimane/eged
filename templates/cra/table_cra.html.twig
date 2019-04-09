@@ -1,0 +1,62 @@
+<table class="table table-responsive table-striped table-bordered  table_cra">
+    <thead>
+    <tr>
+        <th></th>
+        {% set total = 0 %}
+        {% for x in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
+            {% if  x|date('d-m-Y')|date('N') >=6  %}
+                <th class="bg-gris">{{ x|date('d') }}</th>
+            {% else %}
+                <th class="">{{ x|date('d') }}</th>
+            {% endif %}
+
+        {% endfor %}
+    </tr >
+    </thead>
+    <tbody>
+    {% for client in clients %}
+        <tr>
+            <td>{{ client.nom }}</td>
+            {% for x in range(start_date|date('U'), end_date|date('U'), 86400 ) %}
+                {% set week = null %}
+                {% set disabled = 'disabled' %}
+                {% if  x|date('d-m-Y')|date('N') >=6  %}
+                    {% set week = 'bg-g' %}
+                    {% set disabled = 'disabled' %}
+                {% endif %}
+                {% set trouver = false %}
+                {% set journee = null %}
+                {% set cra_id = null %}
+                {% set date_cra = null %}
+                {% for cra in client.cras  %}
+                    {% if x|date('y-m-d') == cra.date| date('y-m-d') %}
+                        {% set trouver = true %}
+                        {% set journee = cra.journee %}
+                        {% set cra_id = cra.id %}
+                        {% set date_cra = cra.date %}
+                        {% set total = total+journee %}
+                        {% else %}
+
+
+
+                    {% endif %}
+                {% endfor %}
+                {% if trouver == true %}
+                    <td data-cra-id="{{ cra_id }}" data-client-id="{{ client.id }}" data-date-td="{{  x|date('Y-m-d')  }}" data-date-cra="{{ date_cra|date('Y-m-d') }}" data-cra-journee="{{ journee }}" class="{{ week }}" onclick="showModal(this)">{{ journee }}</td>
+                {%else%}
+                    <td data-cra-id="{{ cra_id }}" data-client-id="{{ client.id }}" data-date-td="{{  x|date('Y-m-d')  }}" data-date-cra="" data-cra-journee="" class="{{ week }}" {{ disabled }} {% if week=='' %}onclick="showModal(this){% endif %}"></td>
+                {% endif %}
+            {% endfor %}
+
+        </tr>
+    {% endfor %}
+    <tfoot>
+        <tr>
+            <td ><strong>Total: </strong></td>
+            {% for x in range(start_date|date('U'), (end_date|date('U')-1), 86400 ) %}<td></td>{% endfor %}
+            <td><strong>{{ total }}</strong></td>
+        </tr>
+    </tfoot>
+    </tbody>
+
+</table>

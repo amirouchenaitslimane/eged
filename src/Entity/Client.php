@@ -50,8 +50,14 @@ class Client
    * @ORM\OneToMany(targetEntity="Facture", mappedBy="client")
    */
     private $factures;
+  /**
+   * One product has many features. This is the inverse side.
+   * @ORM\OneToMany(targetEntity="Cra", mappedBy="client")
+   */
+    private $cras;
 public function __construct()
 {
+  $this->cras = new ArrayCollection();
   $this->factures = new ArrayCollection();
 }
 
@@ -138,6 +144,37 @@ public function __construct()
             // set the owning side to null (unless already changed)
             if ($facture->getClient() === $this) {
                 $facture->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Cra[]
+     */
+    public function getCras(): Collection
+    {
+        return $this->cras;
+    }
+
+    public function addCra(Cra $cra): self
+    {
+        if (!$this->cras->contains($cra)) {
+            $this->cras[] = $cra;
+            $cra->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCra(Cra $cra): self
+    {
+        if ($this->cras->contains($cra)) {
+            $this->cras->removeElement($cra);
+            // set the owning side to null (unless already changed)
+            if ($cra->getClient() === $this) {
+                $cra->setClient(null);
             }
         }
 

@@ -36,6 +36,14 @@ $('#facturation').DataTable(option_tables);
 $(function () {
     //convertir tout les select en select 2
     $("select").select2();
+    $('.select_client_cra').select2({
+        width: '100%',
+        
+    });
+    $('.select_journee_cra').select2({
+        width: '100%',
+
+    });
     //control de la side bar
     $("#sidebarToggle").on('click', function(e) {
         e.preventDefault();

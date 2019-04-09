@@ -71,3 +71,27 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.table_cra  tr td,.table_cra  tr th{
+  padding: 7px;
+  border: 1px solid #9e9e9e;
+}
+
+.table_cra thead{
+  background-color: #718C00;
+  color: #ffffff;
+  font-size: 12px;
+}
+.bg-gris{
+  background-color: #9b9e9e;
+}
+
+.bg-g{
+  background-color: #d4d4d4;
+}
+
+.table_cra tfoot tr td{
+
+
+  padding: 7px;
+}

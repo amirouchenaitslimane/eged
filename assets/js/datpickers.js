@@ -45,3 +45,8 @@ $('#datetimepicker_fin').datepicker({
     format: 'dd-mm-yyyy',
     autoclose: true,
 });
+$('.datetimepicker_cra').datepicker({
+    language:'fr',
+    format: 'dd-mm-yyyy',
+    autoclose: true,
+});

@@ -143,3 +143,20 @@ tva :
 holidays :
     path: /holidays
     controller: App\Controller\HolidayController::index
+
+
+
+cra_add_ajax:
+    path: /cra/add
+    controller: App\Controller\CraController::add
+
+cra_remove_ajax:
+    path: /cra/remove
+    controller: App\Controller\CraController::remove
+cra_update_ajax:
+  path: /cra/update
+  controller: App\Controller\CraController::update
+
+add_client_cra_ajax:
+  path: /cra/add-client-cra
+  controller: App\Controller\CraController::addClient

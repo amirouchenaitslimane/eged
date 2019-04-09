@@ -8,4 +8,5 @@ require('./chartarea');
 require('./datpickers');
 require('select2/dist/js/select2.min');
 require('./client_add');
+require('./cra');
 require('./main');
