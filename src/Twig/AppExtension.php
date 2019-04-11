@@ -42,7 +42,8 @@ class AppExtension extends AbstractExtension
      new TwigFunction('format_etat_user',[$this,'formatEtatUser'], ['is_safe'=>['html']]),
       new TwigFunction('factureTtc',[$this,'factureTotalTtc'], ['is_safe'=>['html']]),
       new TwigFunction('factureHt',[$this,'factureHt'], ['is_safe'=>['html']]),
-      new TwigFunction('factureTva',[$this,'factureTva'], ['is_safe'=>['html']])
+      new TwigFunction('factureTva',[$this,'factureTva'], ['is_safe'=>['html']]),
+
 
 //
     ];
@@ -152,4 +153,6 @@ public function factureTotalTtc($factures){
     }
     return $total_tva;
   }
+
+
 }

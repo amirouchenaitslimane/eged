@@ -65,13 +65,13 @@ class ClientRepository extends ServiceEntityRepository
 //      ;
 //
 //  }
-  public function findByDate($start, $end='2019-02-28')
+  public function findByDate($start, $end)
   {
     $em=$this->getEntityManager();
 
     return $em->getRepository(Client::class)
       ->createQueryBuilder("c")
-      ->leftJoin("c.cras", "cr")
+      ->Join("c.cras", "cr")
       ->where('cr.date BETWEEN :start AND :end')
       ->setParameter('start',$start)
       ->setParameter('end',$end)

@@ -34,7 +34,7 @@
                         {% set journee = cra.journee %}
                         {% set cra_id = cra.id %}
                         {% set date_cra = cra.date %}
-                        {% set total = total+journee %}
+
                         {% else %}
 
 
@@ -42,6 +42,7 @@
                     {% endif %}
                 {% endfor %}
                 {% if trouver == true %}
+                    {% set total = total+journee %}
                     <td data-cra-id="{{ cra_id }}" data-client-id="{{ client.id }}" data-date-td="{{  x|date('Y-m-d')  }}" data-date-cra="{{ date_cra|date('Y-m-d') }}" data-cra-journee="{{ journee }}" class="{{ week }}" onclick="showModal(this)">{{ journee }}</td>
                 {%else%}
                     <td data-cra-id="{{ cra_id }}" data-client-id="{{ client.id }}" data-date-td="{{  x|date('Y-m-d')  }}" data-date-cra="" data-cra-journee="" class="{{ week }}" {{ disabled }} {% if week=='' %}onclick="showModal(this){% endif %}"></td>

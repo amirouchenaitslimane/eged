@@ -49,7 +49,7 @@ class CraController extends AbstractController
   {
     if($request->request->get('date')){
       $date = new \DateTime("01-".$request->request->get('date'));
-      $start = $date->format('Y-m-d');
+      $start = $date->format('Y-m-01');
       $end = $date->format('Y-m-t');//dernier jour du mois choisi
     }else{
       $date = new \DateTime('now');//le mois courent
